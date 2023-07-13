@@ -5,9 +5,6 @@ import re
 import requests
 import openai
 
-openai.api_key = 'catto_key_P33rJ7zKlu79FXj8mdWxkiu9'
-openai.api_base = 'https://endpoint.cattogpt.repl.co/v1'
-
 
 class FunctionManager:
     def __init__(self, functions=None):

@@ -63,8 +63,8 @@ function_manager = FunctionManager(functions=functions)
 
 print("functions:", function_manager.generate_functions_array())
 
-openai.api_key = 'catto_key_P33rJ7zKlu79FXj8mdWxkiu9'
-openai.api_base = 'https://api.catto.codes/v1'
+openai.api_key = os.environ["OPENAI_API_KEY"]
+openai.api_base = os.environ["OPENAI_API_BASE"]
 
 MAX_ITER = 10
 
@@ -198,7 +198,7 @@ def start_chat():
         "message_history",
         [{
             "role": "system",
-            "content": "You are a helpful assistant.请尽量使用中文来回复"
+            "content": "You are a helpful assistant."
         }],
     )
 

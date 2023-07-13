@@ -70,6 +70,50 @@ cd GPT_CodeInterpreter
 python main.py
 ```
 
+`robot_functions.py` is a Python module that contains a series of utility functions designed to be used in specific scenarios. These functions are written in an asynchronous manner, allowing them to be used in a non-blocking way in your application.
+
+## How to Add Your Functions
+
+You can add your own custom functions to the `robot_functions.py` file located in the `functions` directory. Each function you add should be written as an asynchronous function and include a detailed docstring that describes the function's purpose, parameters, and return values.
+
+Here is an example of how you can add your own function:
+
+```python
+async def your_function_name(your_parameters):
+    """
+    This is the function description, which describes what the function does.
+
+    Parameters:
+    your_parameters: This is the parameter description, which describes what the parameter is.
+    
+    Returns:
+    This is the return description, which describes what the function returns.
+    """
+    # Your function implementation goes here
+```
+
+The docstrings you provide for your functions are important because they are automatically parsed and passed to the GPT model. This helps the model understand the purpose and usage of your functions.
+
+## Function Descriptions
+
+Here is a brief description of the functions provided in the `robot_functions.py` file:
+
+- `python(code: str)`: Executes the provided Python code.
+- `need_file_upload()`: Requests the user to upload a file.
+- `show_images(paths: str)`: Displays images given their file paths.
+- `need_install_package(package_name: str)`: Checks and installs the specified Python package.
+- `csv_to_db(csv_path: str)`: Saves a CSV file to a database.
+- `query_data_by_sql(sql: str)`: Queries data from a database using SQL.
+- `sql_get_tables(sql: str)`: Retrieves all table names in a database.
+- `generate_and_process_dalle_images(dalle_prompt: str)`: Generates DALL-E images based on provided prompts.
+- `generate_and_process_stable_diffusion_images(stable_diffusion_prompt: str)`: Generates Stable Diffusion images based on provided prompts.
+- `get_style_descriptions()`: Returns descriptions of various style presets.
+- `image_2_image_stable_diffusion_images(stable_diffusion_prompt: str, init_image_path: str)`: Generates Stable Diffusion images based on provided prompts and initial image.
+- `change_sd_model()`: Switches the model of the Stability Diffusion API.
+
+Please refer to the docstrings in the `robot_functions.py` file for more detailed descriptions of these functions and their parameters.
+
+
 ## Contact
 
 If you want to contact me you can reach me at 402087139@qq.com

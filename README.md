@@ -1,6 +1,17 @@
 # GPT_CodeInterpreter
 
 
+
+
+## Planned Features
+
+- [ ] Add IPython and Jupyter capabilities to create interactive widgets in robot_functions
+- [ ] Support writing and debugging HTML code directly in robot_functions
+- [ ] Utilize IPython/Jupyter capabilities for smarter and more convenient code writing
+- [ ] Automate iteration of HTML projects to complete full development lifecycle  
+- [ ] Enable better page rendering, not just images - e.g. display pages directly in Jupyter
+
+
 ## Prerequisites
 
 Before you begin, ensure you have met the following requirements:
@@ -115,14 +126,6 @@ Here is a brief description of the functions provided in the `robot_functions.py
 Please refer to the docstrings in the `robot_functions.py` file for more detailed descriptions of these functions and their parameters.
 
 
-
-## Planned Features
-
-- [ ] Add IPython and Jupyter capabilities to create interactive widgets in robot_functions
-- [ ] Support writing and debugging HTML code directly in robot_functions
-- [ ] Utilize IPython/Jupyter capabilities for smarter and more convenient code writing
-- [ ] Automate iteration of HTML projects to complete full development lifecycle  
-- [ ] Enable better page rendering, not just images - e.g. display pages directly in Jupyter
 
 ## Contact
 

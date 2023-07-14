@@ -12,7 +12,8 @@ import os
 import datetime, json
 import openai
 import requests
-import aiofiles
+from .executor import PythonExecutor
+kernel_id = None
 
 import global_value as gv
 
@@ -21,38 +22,18 @@ context = {}
 sql_query_result = None
 
 
-async def python(code: str):
+async def python_exec(code: str, language: str = "python"):
     """
-    When encountering the need to use code to implement a certain function. A very important point is that when calling this function,  must given code without needing other non-code related things.
-    Parameters: 
-      code: Need complete runnable Python code. (Required), very important, the return value of the function is {"type": "image", "path": "path", "status":"true"}, the value of type is image or file or content, image means that what is returned is a picture, file means that what is returned is a file, content means that what is returned is a string, and the last sentence must be print({"type": "image", "path": "path", "status":"status"}) Any place that needs to be displayed, such as using matplotlib、pillow etc are not allowed to use operations like show. It must be saved as an image and then returned. If the data are in table form, please return the obtained complete data directly.
-  """
-    print('=' * 20)
-    print(code)
-    print('=' * 20)
-
-    with open("temp.py", "w") as file:
-        file.write(code)
-
-    proc = subprocess.run(["python3", "temp.py"],
-                          capture_output=True,
-                          text=True)
-
-    results = proc.stdout
-    if proc.stderr:
-        print(f"An error occurred: {proc.stderr}.")
-        return {'type': 'error', 'content': proc.stderr, 'status': 'false'}
-
-    try:
-        results_dict = eval(results)
-    except SyntaxError:
-        print(f"Could not evaluate output: {results}. Skipping...")
-        results_dict = {
-            'type': 'error',
-            'description': 'Could not evaluate output.',
-            'status': 'false'
-        }
-    return results_dict
+    Exexute code. \nNote: This endpoint current supports a REPL-like environment for Python only.\n\nArgs:\n    request (CodeExecutionRequest): The request object containing the code to execute.\n\nReturns:\n    CodeExecutionResponse: The result of the code execution.
+    Parameters: code:
+    """
+  
+    myexcutor = PythonExecutor()
+    code_output = myexcutor.execute(code)
+    print(f"REPL execution result: {code_output}")
+    response = {"result": code_output.strip()}
+    return response
+    
 
 
 async def need_file_upload():
@@ -529,7 +510,7 @@ async def change_sd_model():
 
     actions = []
     for id, description in model_descriptions.items():
-        action = cl.Action(name='action_model',
+        action = cl.Action(name='action_model', # type: ignore
                            value=id,
                            label=id,
                            description=description)

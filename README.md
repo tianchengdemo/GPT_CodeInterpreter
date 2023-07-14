@@ -1,9 +1,6 @@
 # GPT_CodeInterpreter
 
 
-[![点击播放视频](https://img.youtube.com/vi/VIDEO_ID/0.jpg)](https://cdn.discordapp.com/attachments/1128997233950457876/1128997235166814238/07133.mp4 "点击播放视频")
-
-
 ## Prerequisites
 
 Before you begin, ensure you have met the following requirements:

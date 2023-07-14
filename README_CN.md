@@ -113,6 +113,15 @@ async def your_function_name(your_parameters):
 
 请参考 `robot_functions.py` 文件中的 docstrings，以获取这些函数及其参数的更详细描述。
 
+
+## 计划添加的功能
+
+- [ ] 添加IPython和Jupyter的功能,以便可以在robot_functions中创建交互式widgets
+- [ ] 支持直接在robot_functions中编写和调试HTML代码
+- [ ] 利用IPython/Jupyter的功能使代码编写和执行更加智能方便  
+- [ ] 自动迭代HTML项目,完成整个项目的开发流程
+- [ ] 支持更好的页面展示,而不仅仅是图片,比如可以直接在Jupyter中显示页面
+
 ## 联系方式
 
 如果你想联系我，可以通过 402087139@qq.com 向我发送邮件。

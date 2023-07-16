@@ -21,11 +21,10 @@ context = {}
 
 sql_query_result = None
 
-
 async def python_exec(code: str, language: str = "python"):
     """
     Exexute code. \nNote: This endpoint current supports a REPL-like environment for Python only.\n\nArgs:\n    request (CodeExecutionRequest): The request object containing the code to execute.\n\nReturns:\n    CodeExecutionResponse: The result of the code execution.
-    Parameters: code:
+    Parameters: code: (str, required): A Python code snippet for execution in a Jupyter environment, where variables and imports from previously executed code are accessible. The code must not rely on external variables/imports not available in this environment, and must print a dictionary `{"type": "<type>", "path": "<path>", "status": "<status>"}` as the last operation. `<type>` can be "image", "file", or "content", `<path>` is the file path (not needed if `<type>` is "content"), `<status>` indicates execution status. Display operations should save output as a file with path returned in the dictionary. If tabular data is generated, it should be directly returned as a string. The code must end with a `print` statement.the end must be print({"type": "<type>", "path": "<path>", "status": "<status>"})
     """
   
     myexcutor = PythonExecutor()
@@ -43,6 +42,7 @@ async def need_file_upload():
     """
     files = await cl.AskFileMessage(
         content="Please upload a text file to begin!",
+        max_size_mb=10,
         accept=[
             "text/plain",
             "image/png",
@@ -69,7 +69,8 @@ async def need_file_upload():
         'type': 'file',
         'path': file_path,
         'name': file_name,
-        'file_type': file_type
+        'file_type': file_type,
+        'ask_user': '请问您需要对这个文件进行什么操作呢'
     }
 
 
@@ -87,7 +88,7 @@ async def show_images(paths: str):
     await cl.Message(content="Look at these local images!",
                      elements=elements).send()  # type: ignore
 
-    return {'description': '图片显示成功'}
+    return {'description': 'Successfully displayed images', 'path': paths}
 
 
 async def need_install_package(package_name: str) -> dict:

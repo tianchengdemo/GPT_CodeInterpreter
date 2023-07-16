@@ -11,6 +11,8 @@
 - [ ] Automate iteration of HTML projects to complete full development lifecycle  
 - [ ] Enable better page rendering, not just images - e.g. display pages directly in Jupyter
 
+[Video](https://youtu.be/NhZQWoUWLRc)
+[Video](https://youtu.be/AesyvVu4QwI)
 
 ## Prerequisites
 

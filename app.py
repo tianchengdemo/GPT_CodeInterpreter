@@ -1,17 +1,44 @@
-import time
 import openai
 import json
 import ast
 import os
 import chainlit as cl
 from functions.FunctionManager import FunctionManager
-from functions import robot_functions
 import inspect
-import asyncio
-import threading
 import os
 import tiktoken
-import global_value as gv
+import importlib
+import json
+
+# 获取plugins目录下所有的子目录，忽略名为'__pycache__'的目录
+plugin_dirs = [d for d in os.listdir('plugins') 
+               if os.path.isdir(os.path.join('plugins', d)) and d != '__pycache__']
+
+functions = []
+
+# 遍历每个子目录（即每个插件）
+for dir in plugin_dirs:
+    # 尝试读取插件的配置文件
+    try:
+        with open(f'plugins/{dir}/config.json', 'r') as f:
+            config = json.load(f)
+        enabled = config.get('enabled', True)
+    except FileNotFoundError:
+        # 如果配置文件不存在，我们默认这个插件应该被导入
+        enabled = True
+
+    # 检查这个插件是否应该被导入
+    if not enabled:
+        continue
+
+    # 动态导入每个插件的functions模块
+    module = importlib.import_module(f'plugins.{dir}.functions')
+
+    # 获取模块中的所有函数并添加到functions列表中
+    functions.extend([
+        obj for name, obj in inspect.getmembers(module)
+        if inspect.isfunction(obj)
+    ])
 
 max_tokens = 5000
 
@@ -54,11 +81,6 @@ def get_token_count(conversation) -> int:
     num_tokens += 2  # every reply is primed with <im_start>assistant
     return num_tokens
 
-
-functions = [
-    obj for name, obj in inspect.getmembers(robot_functions)
-    if inspect.isfunction(obj)
-]
 function_manager = FunctionManager(functions=functions)
 
 print("functions:", function_manager.generate_functions_array())
@@ -66,7 +88,7 @@ print("functions:", function_manager.generate_functions_array())
 openai.api_key = os.environ["OPENAI_API_KEY"]
 openai.api_base = os.environ["OPENAI_API_BASE"]
 
-MAX_ITER = 10
+MAX_ITER = 100
 
 
 async def on_message(user_message: object):
@@ -176,29 +198,21 @@ async def process_new_delta(new_delta, openai_message, content_ui_message,
     return openai_message, content_ui_message, function_ui_message
 
 
-@cl.action_callback("action_button")
-async def on_action(action):
-    await cl.Message(content=f"选择了 {action.value}",
-                     author="action_style").send()
-    # Optionally remove the action button from the chatbot user interface
-    gv.style_preset = action.value
-
-
-@cl.action_callback("action_model")
-async def on_action_model(action):
-    await cl.Message(content=f"选择了 {action.value}",
-                     author="action_model").send()
-    # Optionally remove the action button from the chatbot user interface
-    gv.model_id = action.value
-
-
 @cl.on_chat_start
 def start_chat():
     cl.user_session.set(
         "message_history",
         [{
             "role": "system",
-            "content": "You are a helpful assistant."
+            "content": """
+            你是一个非常厉害的vue项目开发者，我的项目是test_vue,
+            所有需要开发文件都在项目下的/src目录下,
+            比如main.js应该在/src/main.js,
+            不管是创建文件还是书写代码，都是在这个目录下,
+            如果你发现文件已经存在，并且需要修改它，需要先获取文件内容后再决定如何修改
+            如果在开发过程中已经不知道项目的架构了，可以主动获取项目架构后继续
+            不用解释具体流程，直接修改文件内容即可
+            """
         }],
     )
 

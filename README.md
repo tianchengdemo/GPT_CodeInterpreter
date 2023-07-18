@@ -60,6 +60,9 @@ To run this project, you need to follow these steps:
 
 5. Once Chainlit is installed, you can run the project with the following command: `chainlit run app.py -w`.
 
+## Use Replit to deploy
+[![Run on Repl.it](https://replit.com/badge/github/boyueluzhipeng/GPT_CodeInterpreter.git)](https://replit.com/new/github/boyueluzhipeng/GPT_CodeInterpreter.git)
+
 ## Contributing
 
 Contributions are welcome! Please read the contribution guide to learn how to contribute to this project.

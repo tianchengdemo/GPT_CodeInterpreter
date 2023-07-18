@@ -23,11 +23,22 @@ async def vue_create_directory(path: str, directory_name: str):
         path : The path of the project.
         directory_name : The name of the directory.
     """
+    
     try:
-        subprocess.run(["mkdir", directory_name], cwd=path)
+        cmd = "mkdir " + directory_name
+        print(cmd)
+        completed_process = subprocess.run(cmd, shell=True, cwd=path)
+        print(completed_process)
+        description = ""
+        status = "false"
+        if completed_process.returncode == 0:
+            description = "File created successfully."
+            status = "true"
+        else:
+            description = "File creation failed."
         return {
-            "status": "true",
-            "description": "Directory created successfully.",
+            "status": status,
+            "description": description,
         }
     except Exception as e:
         return {"status": "false", "description": str(e)}
@@ -40,10 +51,20 @@ async def vue_create_file(path: str, file_name: str):
         file_name : The name of the file.
     """
     try:
-        subprocess.run(["touch", file_name], cwd=path)
+        cmd = "touch " + file_name
+        print(cmd)
+        completed_process = subprocess.run(cmd, shell=True, cwd=path)
+        print(completed_process)
+        description = ""
+        status = "false"
+        if completed_process.returncode == 0:
+            description = "File created successfully."
+            status = "true"
+        else:
+            description = "File creation failed."
         return {
-            "status": "true",
-            "description": "File created successfully.",
+            "status": status,
+            "discription": description,
         }
     except Exception as e:
         return {"status": "false", "description": str(e)}
@@ -57,7 +78,9 @@ async def vue_get_project_file_list(path: str):
     """
     # 使用ls命令获取文件列表
     try:
-        tree = subprocess.run(["ls", path], capture_output=True)
+        cmd = "ls -a " + path
+        print(cmd)
+        tree = subprocess.run(cmd, shell=True, capture_output=True)
         return {
             "status": "true",
             "description": tree.stdout.decode(),

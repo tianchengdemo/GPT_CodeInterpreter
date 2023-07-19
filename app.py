@@ -12,6 +12,7 @@ import asyncio
 openai.api_key = os.environ.get("OPENAI_API_KEY")
 openai.api_base = os.environ.get("OPENAI_API_BASE")
 
+
 # 获取plugins目录下所有的子目录，忽略名为'__pycache__'的目录
 plugin_dirs = [
   d for d in os.listdir('plugins')
@@ -47,6 +48,7 @@ function_manager = FunctionManager(functions=functions)
 print("functions:", function_manager.generate_functions_array())
 
 max_tokens = 5000
+is_stop = False
 
 
 def __truncate_conversation(conversation) -> None:
@@ -90,7 +92,9 @@ def get_token_count(conversation) -> int:
 MAX_ITER = 100
 
 
+
 async def on_message(user_message: object):
+  global is_stop
   print("==================================")
   print(user_message)
   print("==================================")
@@ -117,6 +121,10 @@ async def on_message(user_message: object):
           functions=function_manager.generate_functions_array(),
           temperature=0):  # type: ignore
         new_delta = stream_resp.choices[0]["delta"]
+        if is_stop:
+          is_stop = False
+          cur_iter = MAX_ITER
+          break
         openai_message, content_ui_message, function_ui_message = await process_new_delta(
           new_delta, openai_message, content_ui_message, function_ui_message)
     except Exception as e:
@@ -185,8 +193,7 @@ async def process_new_delta(new_delta, openai_message, content_ui_message,
         content="",
         indent=1,
         language="json")
-      await function_ui_message.stream_token(new_delta["function_call"]["name"]
-                                             )
+      await function_ui_message.stream_token(new_delta["function_call"]["name"])
 
     if "arguments" in new_delta["function_call"]:
       if "arguments" not in openai_message["function_call"]:
@@ -218,3 +225,10 @@ def start_chat():
 @cl.on_message
 async def run_conversation(user_message: object):
   await on_message(user_message)
+  
+  
+@cl.on_stop
+async def stop_chat():
+  global is_stop
+  print("stop chat")
+  is_stop = True

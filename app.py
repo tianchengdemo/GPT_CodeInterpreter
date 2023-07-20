@@ -39,7 +39,11 @@ for dir in plugin_dirs:
 function_manager = FunctionManager(functions=functions)
 print("functions:", function_manager.generate_functions_array())
 
-max_tokens = os.environ.get("MAX_TOKENS") or 10000
+env_max_tokens = os.environ.get("MAX_TOKENS", None)
+if env_max_tokens is not None:
+  max_tokens = int(env_max_tokens)
+else:
+    max_tokens = 5000
 is_stop = False
 
 

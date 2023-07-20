@@ -6,4 +6,5 @@ images/*
 .chainlit/*
 *.json
 **/*.json
-# plugins/*/*.json
+plugins/*/*.json
+tmp/*

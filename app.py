@@ -8,38 +8,30 @@ import inspect
 import tiktoken
 import importlib
 import asyncio
+from functions.MakeRequest import make_request, make_request_chatgpt_plugin
+import globale_values as gv
 
 openai.api_key = os.environ.get("OPENAI_API_KEY")
 openai.api_base = os.environ.get("OPENAI_API_BASE")
 
-
-# 获取plugins目录下所有的子目录，忽略名为'__pycache__'的目录
 plugin_dirs = [
   d for d in os.listdir('plugins')
   if os.path.isdir(os.path.join('plugins', d)) and d != '__pycache__'
 ]
 
 functions = []
-
-# 遍历每个子目录（即每个插件）
 for dir in plugin_dirs:
-  # 尝试读取插件的配置文件
   try:
     with open(f'plugins/{dir}/config.json', 'r') as f:
       config = json.load(f)
     enabled = config.get('enabled', True)
   except FileNotFoundError:
-    # 如果配置文件不存在，我们默认这个插件应该被导入
     enabled = True
 
-  # 检查这个插件是否应该被导入
   if not enabled:
     continue
 
-  # 动态导入每个插件的functions模块
   module = importlib.import_module(f'plugins.{dir}.functions')
-
-  # 获取模块中的所有函数并添加到functions列表中
   functions.extend([
     obj for name, obj in inspect.getmembers(module) if inspect.isfunction(obj)
   ])
@@ -47,50 +39,37 @@ for dir in plugin_dirs:
 function_manager = FunctionManager(functions=functions)
 print("functions:", function_manager.generate_functions_array())
 
-max_tokens = 5000
+max_tokens = os.environ.get("MAX_TOKENS") or 10000
 is_stop = False
 
 
-def __truncate_conversation(conversation) -> None:
-  """
-    Truncate the conversation
-    """
-  # 第一条取出来
+def __truncate_conversation(conversation):
   system_con = conversation[0]
-  # 去掉第一条
   conversation = conversation[1:]
   while True:
     if (get_token_count(conversation) > max_tokens and len(conversation) > 1):
-      # Don't remove the first message
       conversation.pop(1)
     else:
       break
-  # 再把第一条加回来
   conversation.insert(0, system_con)
   return conversation
 
 
-# https://github.com/openai/openai-cookbook/blob/main/examples/How_to_count_tokens_with_tiktoken.ipynb
-def get_token_count(conversation) -> int:
-  """
-    Get token count
-    """
-  encoding = tiktoken.encoding_for_model('gpt-4')
+def get_token_count(conversation):
+  encoding = tiktoken.encoding_for_model(os.environ.get("OPENAI_MODEL") or "gpt-4")
 
   num_tokens = 0
   for message in conversation:
-    # every message follows <im_start>{role/name}\n{content}<im_end>\n
     num_tokens += 4
     for key, value in message.items():
       num_tokens += len(encoding.encode(str(value)))
-      if key == "name":  # if there's a name, the role is omitted
-        num_tokens += -1  # role is always required and always 1 token
-  num_tokens += 2  # every reply is primed with <im_start>assistant
+      if key == "name":
+        num_tokens += -1
+  num_tokens += 2
   return num_tokens
 
 
 MAX_ITER = 100
-
 
 
 async def on_message(user_message: object):
@@ -103,22 +82,30 @@ async def on_message(user_message: object):
   message_history.append({"role": "user", "content": user_message})
 
   cur_iter = 0
+  
+  err_count = 0
 
   while cur_iter < MAX_ITER:
 
-    # OpenAI call
     openai_message = {"role": "", "content": ""}
     function_ui_message = None
     content_ui_message = cl.Message(content="")
     stream_resp = None
     send_message = __truncate_conversation(message_history)
     try:
+      functions = function_manager.generate_functions_array()
+      user_plugin_api_info = cl.user_session.get('user_plugin_api_info')
+      if user_plugin_api_info is not None:
+        for item in user_plugin_api_info:
+          for i in item['api_info']:
+            functions.append(i)
+      print("functions:", functions)
       async for stream_resp in await openai.ChatCompletion.acreate(
-          model="gpt-4",
+          model=os.environ.get("OPENAI_MODEL") or "gpt-4",
           messages=send_message,
           stream=True,
           function_call="auto",
-          functions=function_manager.generate_functions_array(),
+          functions=functions,
           temperature=0):  # type: ignore
         new_delta = stream_resp.choices[0]["delta"]
         if is_stop:
@@ -130,6 +117,16 @@ async def on_message(user_message: object):
     except Exception as e:
       print(e)
       cur_iter += 1
+      err_count += 1
+      if err_count > 4:
+        cl.user_session.set("user_plugin_api_info", None)
+        # await cl.Message(
+        #     author="system",
+        #     content="您的插件已经失效，已经为您清除,请重新绑定其他插件",
+        #     indent=1,
+        #     language="json",
+        #     ).send()
+        break
       await asyncio.sleep(1)
       continue
 
@@ -145,25 +142,83 @@ async def on_message(user_message: object):
       break
     elif stream_resp.choices[0]["finish_reason"] != "function_call":
       raise ValueError(stream_resp.choices[0]["finish_reason"])
-    # if code arrives here, it means there is a function call
+
     function_name = openai_message.get("function_call").get("name")
     print(openai_message.get("function_call"))
+    function_response = ""
     try:
       arguments = json.loads(
         openai_message.get("function_call").get("arguments"))
     except:
       arguments = ast.literal_eval(
         openai_message.get("function_call").get("arguments"))
+    try:
+      function_response = await function_manager.call_function(
+        function_name, arguments)
+    except Exception as e:
+      print(e)
+      try:
+        # 分割function_name,_分割,如果个数不是3个，就报错
+        function_name_split = function_name.split('_')
+        if len(function_name_split) < 3:
+          print('function_name_split is not 3')
+          is_gpt_plugin = False
+          if gv.chatgpt_plugin_info is None:
+            with open('plugins/serverplugin/my_apis.json', 'r') as f:
+              gv.chatgpt_plugin_info = json.load(f)
+          plugin_info = gv.chatgpt_plugin_info
+          print('共有{}个插件'.format(len(plugin_info)))
+          for item in plugin_info:
+            for api in item['apis']:
+              if api['name'] == function_name:
+                id = item['id']
+                name = api['name']
+                arguments = json.dumps(arguments)
+                function_response = make_request_chatgpt_plugin(
+                  id, name, arguments)
+                is_gpt_plugin = True
+                break
+            if is_gpt_plugin:
+              break
+          if not is_gpt_plugin:
+            try:
+              method = function_name_split[-2]
+              url_md5 = function_name_split[-1]
+              request_function_name = '_'.join(function_name_split[:-2])
+              print(method, url_md5, request_function_name)
+              # 通过url_md5去获取url
+              if user_plugin_api_info is None:
+                raise Exception('user_plugin_api_info is None')
+              for item in user_plugin_api_info:
+                if item['url_md5'] == url_md5:
+                  url = item['url']
+                  function_response = make_request(url, method,
+                                                   request_function_name,
+                                                   arguments)
+                  print(function_response)
+                  # 如果是
+                  if isinstance(function_response, (tuple, list, dict)):
+                    function_response = json.dumps(function_response)
+                  break
+            except Exception as e:
+              print(e)
+              function_response = '请求失败'
 
-    function_response = await function_manager.call_function(
-      function_name, arguments)
-    # print(function_response)
-
+      except Exception as e:
+        print(e)
+        break
+    print("==================================")
+    print(function_response)
+    if type(function_response) != str:
+      function_response = str(function_response)
     message_history.append({
       "role": "function",
       "name": function_name,
       "content": function_response,
     })
+    print("==================================")
+    print(message_history)
+    print("==================================")
 
     await cl.Message(
       author=function_name,
@@ -193,7 +248,8 @@ async def process_new_delta(new_delta, openai_message, content_ui_message,
         content="",
         indent=1,
         language="json")
-      await function_ui_message.stream_token(new_delta["function_call"]["name"])
+      await function_ui_message.stream_token(new_delta["function_call"]["name"]
+                                             )
 
     if "arguments" in new_delta["function_call"]:
       if "arguments" not in openai_message["function_call"]:
@@ -213,11 +269,7 @@ def start_chat():
       "role":
       "system",
       "content":
-      """
-                你是一个非常厉害的uniapp开发助手，你能协助我完成一个完整的uniapp项目开发，
-                首先你需要先查看整个项目的一些关键文件，来确定项目内容，
-                然后如果需要修改项目中的某个文件，在你不确定文件内容的时候，可以先尝试阅读文件之后，在决定如何修改
-            """
+      " You are a helpful AI assistant."
     }],
   )
 
@@ -225,8 +277,8 @@ def start_chat():
 @cl.on_message
 async def run_conversation(user_message: object):
   await on_message(user_message)
-  
-  
+
+
 @cl.on_stop
 async def stop_chat():
   global is_stop

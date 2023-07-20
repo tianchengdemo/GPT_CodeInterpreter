@@ -31,6 +31,8 @@ class FunctionManager:
         for function_name, function in self.functions.items():
             if function_name in self.excluded_functions:  # 添加这行
                 continue
+            if function_name.startswith('get_md5') or function_name.startswith('get_api_info'):  # 添加这行
+                continue
             # 获取函数的文档字符串和参数列表
             docstring = function.__doc__
             parameters = inspect.signature(function).parameters
@@ -93,7 +95,6 @@ class FunctionManager:
                         parameter_name)
 
             functions_array.append(function_info)
-
         return functions_array
 
     async def call_function(self, function_name, args_dict):

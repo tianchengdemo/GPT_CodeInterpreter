@@ -16,6 +16,8 @@ async def python_exec(code: str, language: str = "python"):
     code_output = myexcutor.execute(code)
     print(f"REPL execution result: {code_output}")
     response = {"result": code_output.strip()}
+    # 用\n分割到一个数组中，然后去出数组中重复的元素
+    response["result"] = "\n".join(list(set(response["result"].split("\n"))))
     return response
 
 async def need_install_package(package_name: str) -> dict:

@@ -1,3 +1,4 @@
+import json
 import os
 import chainlit as cl
 
@@ -61,3 +62,4 @@ async def show_images(paths: str):
                      elements=elments).send()  # type: ignore
 
     return {'description': '图片已经显示成功了，下面的回复中不再需要展示它了'}
+    

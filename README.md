@@ -6,6 +6,26 @@ Chainlit is an AI-driven project designed to carry out various tasks. It is buil
 
 - **Plugin Architecture**: Chainlit uses a flexible and extensible plugin architecture. Each plugin is a folder containing `functions.py` and `config.json` files, defining the functionality and configuration of the plugin.
 
+### 🌟 Upcoming Features:
+
+- **Official Plugin Integration🔌**: By processing the provided standard `openapi.yaml` from the official sources, we can automatically fetch the corresponding request URLs and method names. These will be combined with local functions and sent to GPT as if invoking local features. Upon user invocation, we'll categorize and request the respective API, ensuring real-time and precise feedback.
+
+- **Role Masking🎭**: We've integrated numerous role-based features within our local plugins. For instance, the newly added `Vue` plugin can be used to modify local Vue projects effortlessly.
+
+- **Join the Movement🤝**: We're actively inviting passionate individuals to collaborate with us on this project! Let's move towards a "metaGPT" future and co-develop an array of fascinating role plugins.
+
+### 🌈 Future Plans:
+
+- **Multi-client Interactions🔗**: When running multiple clients, we aspire for these clients to exchange messages, facilitating data transfer amongst different roles.
+
+  **Preliminary Concept💡**:
+
+  - **Server-side⚙️**: Operated by a GPT-4 "Administrator" preset role, its main duties will encompass assigning tasks based on users' "Role Masks" and preset objectives, and subsequently evaluating task completion rates.
+  
+  - **Client-side🖥️**: Users can autonomously register with the server and will then be able to receive dispatched tasks and feedback on task completion rates. It can execute certain tasks autonomously and also supports interaction via a web chat interface to accomplish associated tasks.
+
+Let's look forward to the limitless possibilities these new features can offer! 🚀🎉
+
 - **Function Manager**: The function manager is responsible for parsing and calling the functions defined in the `functions.py` file of each plugin.
 
 - **AI Driven**: Chainlit leverages the power of AI to understand and generate human language, enabling it to handle a variety of tasks.

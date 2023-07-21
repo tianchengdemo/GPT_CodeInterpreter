@@ -6,11 +6,12 @@ GPT_CodeInterpreter is an AI-driven project designed to carry out various tasks 
 
 To get a better understanding of GPT_CodeInterpreter's capabilities, you can watch the following video demonstrations:
 
-<video src="https://github.com/boyueluzhipeng/GPT_CodeInterpreter/releases/download/v1.0.0/0718.mp4" controls title="https://szby.oss-cn-beijing.aliyuncs.com/07133.mp4"></video>
-<video src="https://github.com/boyueluzhipeng/GPT_CodeInterpreter/releases/download/v1.0.0/07134.mp4" controls title="https://szby.oss-cn-beijing.aliyuncs.com/0718.mp4"></video>
+
+https://github.com/boyueluzhipeng/GPT_CodeInterpreter/releases/download/v1.0.0/0718.mp4
 
 
-This version adds the section for video demonstrations in English. The video links are clickable, allowing viewers to directly watch the demonstrations by clicking on them. If you have any other requirements or need further modifications, please feel free to let me know!
+https://github.com/boyueluzhipeng/GPT_CodeInterpreter/releases/download/v1.0.0/07134.mp4
+
 
 ## Project Features
 

@@ -7,6 +7,12 @@ GPT_CodeInterpreter is an AI-driven project designed to carry out various tasks 
 https://github.com/boyueluzhipeng/GPT_CodeInterpreter/assets/39090632/d55503f7-f51c-4d0a-a284-e811eb5a98ac
 
 
+## Help To Code Vue Project
+
+https://github.com/boyueluzhipeng/GPT_CodeInterpreter/assets/39090632/ceedf044-e48b-44af-bfaa-ad7b540fc60c
+
+
+
 ## Project Features
 
 - **Plugin Architecture**: GPT_CodeInterpreter uses a flexible and extensible plugin architecture. Each plugin is a folder containing `functions.py` and `config.json` files, defining the functionality and configuration of the plugin.

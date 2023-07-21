@@ -5,8 +5,13 @@ GPT_CodeInterpreter 是一个由 AI 驱动的项目，旨在执行与代码解�
 ## 视频演示 🎥
 
 为了更好地了解 GPT_CodeInterpreter 的功能，您可以观看以下演示视频：
-https://github.com/boyueluzhipeng/GPT_CodeInterpreter/releases/download/v1.0.0/0718.mp4" controls title="https://szby.oss-cn-beijing.aliyuncs.com/07133.mp4
-<video src="https://github.com/boyueluzhipeng/GPT_CodeInterpreter/releases/download/v1.0.0/07134.mp4" controls title="https://szby.oss-cn-beijing.aliyuncs.com/0718.mp4"></video>
+
+https://github.com/boyueluzhipeng/GPT_CodeInterpreter/assets/39090632/d55503f7-f51c-4d0a-a284-e811eb5a98ac
+
+
+## 帮助完成Vue项目的开发
+
+https://github.com/boyueluzhipeng/GPT_CodeInterpreter/assets/39090632/ceedf044-e48b-44af-bfaa-ad7b540fc60c
 
 ## 项目特点
 

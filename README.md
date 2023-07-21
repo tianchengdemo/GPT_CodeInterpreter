@@ -4,13 +4,7 @@ GPT_CodeInterpreter is an AI-driven project designed to carry out various tasks 
 
 ## Video Demonstrations 🎥
 
-To get a better understanding of GPT_CodeInterpreter's capabilities, you can watch the following video demonstrations:
-
-
-https://github.com/boyueluzhipeng/GPT_CodeInterpreter/releases/download/v1.0.0/0718.mp4
-
-
-https://github.com/boyueluzhipeng/GPT_CodeInterpreter/releases/download/v1.0.0/07134.mp4
+https://github.com/boyueluzhipeng/GPT_CodeInterpreter/assets/39090632/d55503f7-f51c-4d0a-a284-e811eb5a98ac
 
 
 ## Project Features

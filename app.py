@@ -184,29 +184,26 @@ async def on_message(user_message: object):
                 break
             if is_gpt_plugin:
               break
-          if not is_gpt_plugin:
-            try:
-              method = function_name_split[-2]
-              url_md5 = function_name_split[-1]
-              request_function_name = '_'.join(function_name_split[:-2])
-              print(method, url_md5, request_function_name)
-              # 通过url_md5去获取url
-              if user_plugin_api_info is None:
+        else:
+            method = function_name_split[-2]
+            url_md5 = function_name_split[-1]
+            request_function_name = '_'.join(function_name_split[:-2])
+            print(method, url_md5, request_function_name)
+            # 通过url_md5去获取url
+            if user_plugin_api_info is None:
                 raise Exception('user_plugin_api_info is None')
-              for item in user_plugin_api_info:
+            for item in user_plugin_api_info:
+                print(item)
                 if item['url_md5'] == url_md5:
-                  url = item['url']
-                  function_response = make_request(url, method,
-                                                   request_function_name,
-                                                   arguments)
-                  print(function_response)
-                  # 如果是
-                  if isinstance(function_response, (tuple, list, dict)):
-                    function_response = json.dumps(function_response)
-                  break
-            except Exception as e:
-              print(e)
-              function_response = '请求失败'
+                    url = item['url']
+                    function_response = make_request(url, method,
+                                                    request_function_name,
+                                                    arguments)
+                    print(function_response)
+                    # 如果是
+                    if isinstance(function_response, (tuple, list, dict)):
+                        function_response = json.dumps(function_response)
+                    break
 
       except Exception as e:
         print(e)
@@ -266,7 +263,7 @@ async def process_new_delta(new_delta, openai_message, content_ui_message,
 
 
 @cl.on_chat_start
-def start_chat():
+async def start_chat():
     content = """
        Assistant is designed to be able to assist with a wide range of tasks, from answering simple questions to providing in-depth explanations and discussions on a wide range of topics. 
         As a language model, Assistant is able to generate human-like text based on the input it receives, allowing it to engage in natural-sounding conversations and provide responses that are coherent and relevant to the topic at hand.
@@ -279,6 +276,7 @@ def start_chat():
         Tell the human if they use the code interpreter incorrectly.
         Already installed packages are: (numpy pandas matplotlib seaborn scikit-learn yfinance scipy statsmodels sympy bokeh plotly dash networkx).
         If you encounter an error, try again and fix the code.
+        如果返回的内容中包括server_url并且你需要展示图片的时候，请在图片前面加上server_url的前缀
     """
     language = os.environ.get("OPENAI_LANGUAGE") or "chinese"
     cl.user_session.set(
@@ -289,6 +287,10 @@ def start_chat():
         "content": content + "\n\n" + "Please asnwer me in " + language
         }],
     )
+    await cl.Avatar(
+        name="Chatbot",
+        url="https://avatars.githubusercontent.com/u/128686189?s=400&u=a1d1553023f8ea0921fba0debbe92a8c5f840dd9&v=4",
+    ).send()
 
 
 @cl.on_message

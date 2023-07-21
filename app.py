@@ -276,7 +276,6 @@ async def start_chat():
         Tell the human if they use the code interpreter incorrectly.
         Already installed packages are: (numpy pandas matplotlib seaborn scikit-learn yfinance scipy statsmodels sympy bokeh plotly dash networkx).
         If you encounter an error, try again and fix the code.
-        如果返回的内容中包括server_url并且你需要展示图片的时候，请在图片前面加上server_url的前缀
     """
     language = os.environ.get("OPENAI_LANGUAGE") or "chinese"
     cl.user_session.set(

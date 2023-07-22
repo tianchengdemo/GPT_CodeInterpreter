@@ -30,8 +30,8 @@ GPT_CodeInterpreter 是一个AI驱动的项目，旨在执行各种代码解释�
 
 3. 在 `.env` 文件中，您还需要设置 OpenAI API 的基本 URL。这应该是一个字符串，类似于 `OPENAI_API_BASE=https://api.openai.com/v1`。
 
-4. 保存 `.env` 文件后，您需要安装 GPT_CodeInterpreter。您可以使用 pip 进行安装：`pip install gpt_codeinterpreter`。
+4. 保存 `.env` 文件后，您需要安装 GPT_CodeInterpreter。您可以使用 pip 进行安装：`pip install -r requirements.txt`。
 
-5. 安装完成后，您可以通过以下命令运行项目：`gpt_codeinterpreter run app.py`。
+5. 安装完成后，您可以通过以下命令运行项目：`chainlit run app.py`。
 
 希望这样的显示更加生动和易读！如果您有其他问题或需要进一步的帮助，请随时告诉我。

@@ -8,3 +8,4 @@ images/*
 **/*.json
 plugins/*/*.json
 tmp/*
+.env

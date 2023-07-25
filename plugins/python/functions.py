@@ -5,20 +5,37 @@ import chainlit as cl
 import os
 from .executor import PythonExecutor
 
+myexcutor = PythonExecutor()
 
-async def python_exec(code: str, language: str = "python"):
-    """
-    Exexute code. \nNote: This endpoint current supports a REPL-like environment for Python only.\n\nArgs:\n    request (CodeExecutionRequest): The request object containing the code to execute.\n\nReturns:\n    CodeExecutionResponse: The result of the code execution.
-    Parameters: code: (str, required): A Python code snippet for execution in a Jupyter environment, where variables and imports from previously executed code are accessible. The code must not rely on external variables/imports not available in this environment, and must print a dictionary `{"type": "<type>", "path": "<path>", "status": "<status>"}` as the last operation. `<type>` can be "image", "file", or "content", `<path>` is the file path (not needed if `<type>` is "content"), `<status>` indicates execution status. Display operations should save output as a file with path returned in the dictionary. If tabular data is generated, it should be directly returned as a string. The code must end with a `print` statement.the end must be print({"type": "<type>", "path": "<path>", "status": "<status>"})
-    """
 
-    myexcutor = PythonExecutor()
+async def cmd_exec(command: str):
+    """
+    A shell. Use this to execute shell commands. Input should be a valid shell command.like ls -l,wget https://www.baidu.com...
+    Parameters: command: (str, required):The command to execute.
+    """
+    # 执行命令
+    proc = subprocess.Popen(command,
+                            stdout=subprocess.PIPE,
+                            stderr=subprocess.PIPE,
+                            shell=True)
+    out, err = proc.communicate()
+    if err:
+        return {"result": err.decode()}
+    return {"result": out.decode()} 
+
+
+async def python_exec(code: str):
+    """
+    A Python shell. Use this to execute python commands. Input should be a valid python command. 
+    Parameters: code: (str, required):You are a standalone Python REPL where the context of the code executed through this function is preserved. Subsequent code can directly access the global and local variables from previous code without the need to regenerate the entire code.)
+    """
     code_output = myexcutor.execute(code)
     print(f"REPL execution result: {code_output}")
-    response = {"result": code_output.strip()}
-    # 用\n分割到一个数组中，然后去出数组中重复的元素
-    response["result"] = "\n".join(list(set(response["result"].split("\n"))))
-    return response
+    if code_output is None:
+        code_output = {"result": "None", "output": "None"}
+    if code_output['result'] is None and code_output['output'] is None:
+        return {"result": "you need to print something at the end of the code"}
+    return code_output
 
 async def need_install_package(package_name: str) -> dict:
     """

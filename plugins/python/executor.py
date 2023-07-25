@@ -87,6 +87,7 @@ class PythonExecutor:
         sys.stdout = mystdout = StringIO()
 
         response = {
+            'status': 'success',
             'result': '',
             'output': ''
         }
@@ -110,9 +111,11 @@ class PythonExecutor:
             except Exception as e:
                 # 添加异常的详细信息
                 response['error_traceback'] = self.get_useful_traceback(e)
+                response['status'] = 'error'
         except Exception as e:
             # 添加异常的详细信息
             response['error_traceback'] = self.get_useful_traceback(e)
+            response['status'] = 'error'
 
         response['error_traceback'] = str(response.get('error_traceback', ''))
         # 获取标准输出内容
@@ -121,7 +124,8 @@ class PythonExecutor:
         response['output'] = output.strip() if output else 'None'
         final_response = {
             "output": response['output'],
-            "result": response['result']
+            "result": response['result'],
+            'status': response['status']
         }
         # 如果error_traceback存在，就需要拼凑下字符串
         if response.get('error_traceback', '') != '':

@@ -138,7 +138,6 @@ async def on_message(user_message: object):
             await asyncio.sleep(2)
             continue
 
-        message_history.append(openai_message)
         if function_ui_message is not None:
             await function_ui_message.send()
 
@@ -162,6 +161,7 @@ async def on_message(user_message: object):
                 if function_name == 'python':
                   function_name = 'python_exec'
                 arguments = {"code": openai_message.get("function_call").get("arguments")}
+                openai_message["function_call"]["arguments"] = json.dumps(arguments)
         try:
             function_response = await function_manager.call_function(
                 function_name, arguments)
@@ -218,6 +218,8 @@ async def on_message(user_message: object):
         print(function_response)
         if type(function_response) != str:
             function_response = str(function_response)
+        
+        message_history.append(openai_message)
         message_history.append({
             "role": "function",
             "name": function_name,
@@ -246,17 +248,19 @@ async def process_new_delta(new_delta, openai_message, content_ui_message,
         await content_ui_message.stream_token(new_content)
     if "function_call" in new_delta:
         if "name" in new_delta["function_call"]:
+            function_name = new_delta["function_call"]["name"]
+            if function_name == "python":
+                function_name = "python_exec"
             openai_message["function_call"] = {
-                "name": new_delta["function_call"]["name"]
+                "name": function_name,
             }
             await content_ui_message.send()
             function_ui_message = cl.Message(
-                author=new_delta["function_call"]["name"],
+                author=function_name,
                 content="",
                 indent=1,
                 language="json")
-            await function_ui_message.stream_token(new_delta["function_call"]["name"]
-                                                   )
+            await function_ui_message.stream_token(function_name)
 
         if "arguments" in new_delta["function_call"]:
             if "arguments" not in openai_message["function_call"]:

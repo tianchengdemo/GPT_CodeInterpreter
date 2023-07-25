@@ -9,7 +9,7 @@ import openai
 class FunctionManager:
     def __init__(self, functions=None):
         self.functions = {}
-        self.excluded_functions = {'inspect', 'create_engine'}  # 添加这行
+        self.excluded_functions = {'inspect', 'create_engine', 'initialize_agent', 'create_python_agent'}  # 添加这行
         if functions:
             for func in functions:
                 self.functions[func.__name__] = func
@@ -29,6 +29,7 @@ class FunctionManager:
         functions_array = []
 
         for function_name, function in self.functions.items():
+            print(function_name)
             if function_name in self.excluded_functions:  # 添加这行
                 continue
             if function_name.startswith('get_md5') or function_name.startswith('get_api_info'):  # 添加这行
@@ -98,6 +99,7 @@ class FunctionManager:
         return functions_array
 
     async def call_function(self, function_name, args_dict):
+        # 如果args_dict是一个字符串，那么就尝试将它转换成一个字典
         if function_name not in self.functions:
             raise ValueError(f"Function '{function_name}' not found")
 

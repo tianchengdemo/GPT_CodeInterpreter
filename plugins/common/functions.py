@@ -37,10 +37,10 @@ async def need_file_upload():
     with open(file_path, "wb") as f:
         f.write(content)
     return {
-        'type': 'file',
         'path': file_path,
         'name': file_name,
-        'file_type': file_type
+        'file_type': file_type,
+        'description': f"文件已经保存到{file_path}中了"
     }
 
 

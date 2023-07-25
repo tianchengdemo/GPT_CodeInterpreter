@@ -2,6 +2,7 @@ import sys
 import ast
 from io import StringIO
 from pprint import pformat
+import traceback
 from typing import Dict, Optional, Any
 
 def is_module_installed(module_name: str) -> bool:
@@ -60,7 +61,7 @@ class PythonExecutor:
     def __init__(self):
         self._context = {}
 
-    def execute(self, code: str) -> Dict[str, Optional[str]]:
+    def execute(self, code: str):
         """
         执行传入的Python代码，并返回执行结果和任何打印输出。
         返回值是一个字典，其中:
@@ -97,16 +98,26 @@ class PythonExecutor:
                         pass
             except Exception as e:
                 response['result'] = repr(e)
+                # 添加异常的详细信息
+                response['error_traceback'] = self.get_useful_traceback()
         except Exception as e:
             response['result'] = repr(e)
+            # 添加异常的详细信息
+            response['error_traceback'] = self.get_useful_traceback()
 
         response['result'] = str(response['result'])
+        response['error_traceback'] = str(response.get('error_traceback', ''))
         # 获取标准输出内容
         sys.stdout = old_stdout
         output = mystdout.getvalue()
-        response['output'] = output.strip() if output else None
+        response['output'] = output.strip() if output else 'None'
 
         return response
+    
+    def get_useful_traceback(self):
+        exc_type, exc_value, exc_traceback = sys.exc_info()
+        useful_traceback = "".join(traceback.format_exception(exc_type, exc_value, exc_traceback, limit=10))
+        return useful_traceback
    
     def get_context(self):
         """返回当前的上下文（包括所有变量和函数）"""

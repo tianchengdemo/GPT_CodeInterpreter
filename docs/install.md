@@ -30,9 +30,9 @@ To run this project, you need to follow these steps:
 
 3. Still in the `.env` file, you need to set the base URL for the OpenAI API. This should be a string, like `OPENAI_API_BASE=https://api.openai.com/v1`.
 
-4. After saving the `.env` file, you need to install GPT_CodeInterpreter. You can do this with pip: `pip install gpt_codeinterpreter`.
+4. After saving the `.env` file, you need to install GPT_CodeInterpreter. You can do this with pip: `pip install -r requirements.txt`.
 
-5. Once GPT_CodeInterpreter is installed, you can run the project with the following command: `gpt_codeinterpreter run app.py`.
+5. Once GPT_CodeInterpreter is installed, you can run the project with the following command: `chainlit run app.py`.
 
 Hope this display is more engaging and readable! If you have any other questions or need further assistance, feel free to let me know.
 

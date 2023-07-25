@@ -60,6 +60,17 @@ class PythonExecutor:
     
     def __init__(self):
         self._context = {}
+        
+    
+    
+    def get_useful_traceback(self, e) -> str:
+        exc_type, exc_value, exc_traceback = sys.exc_info()
+        traceback_list = traceback.format_exception(exc_type, exc_value, exc_traceback)
+        # 选择前10行和后10行，并合并为一个字符串
+        useful_traceback = "".join(traceback_list[-5:])
+        line_number = exc_traceback.tb_lineno
+        error_message = 'Error Message: ' + str(e) + '\n' + 'Line Number: ' + str(line_number) + '\n'
+        return error_message + str(useful_traceback)
 
     def execute(self, code: str):
         """
@@ -97,31 +108,25 @@ class PythonExecutor:
                     except:
                         pass
             except Exception as e:
-                track_info = sys.exc_info()
                 # 添加异常的详细信息
-                response['error_traceback'], line_number = self.get_useful_traceback()
-                response['result'] = 'Error Message: ' + str(e) + '\n' + 'Line Number: ' + str(line_number)
+                response['error_traceback'] = self.get_useful_traceback(e)
         except Exception as e:
             # 添加异常的详细信息
-            response['error_traceback'], line_number = self.get_useful_traceback()
-            response['result'] = 'Error Message: ' + str(e) + '\n' + 'Line Number: ' + str(line_number)
+            response['error_traceback'] = self.get_useful_traceback(e)
 
-        response['result'] = str(response['result'])
         response['error_traceback'] = str(response.get('error_traceback', ''))
         # 获取标准输出内容
         sys.stdout = old_stdout
         output = mystdout.getvalue()
         response['output'] = output.strip() if output else 'None'
-
-        return response
-    
-    def get_useful_traceback(self):
-        exc_type, exc_value, exc_traceback = sys.exc_info()
-        traceback_list = traceback.format_exception(exc_type, exc_value, exc_traceback)
-        # 选择前10行和后10行，并合并为一个字符串
-        useful_traceback = "".join(traceback_list[-5:])
-        line_number = exc_traceback.tb_lineno
-        return useful_traceback, line_number
+        final_response = {
+            "output": response['output'],
+            "result": response['result']
+        }
+        # 如果error_traceback存在，就需要拼凑下字符串
+        if response.get('error_traceback', '') != '':
+            final_response['description'] = response.get('error_traceback', '') + '\n You need to check the error message above and then try to solve the problem by using existing functions or fixing the code.'
+        return final_response
    
     def get_context(self):
         """返回当前的上下文（包括所有变量和函数）"""

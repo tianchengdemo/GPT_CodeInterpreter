@@ -3,39 +3,46 @@ import subprocess
 import sys
 import chainlit as cl
 import os
-from .executor import PythonExecutor
+from .executor import CodeExecutor
 
-myexcutor = PythonExecutor()
+myexcutor = CodeExecutor()
 
 
-async def cmd_exec(command: str):
-    """
-    A shell. Use this to execute shell commands. Input should be a valid shell command.like ls -l,wget https://www.baidu.com...
-    Parameters: command: (str, required):The command to execute.
-    """
-    # 执行命令
-    proc = subprocess.Popen(command,
-                            stdout=subprocess.PIPE,
-                            stderr=subprocess.PIPE,
-                            shell=True)
-    out, err = proc.communicate()
-    if err:
-        return {"result": err.decode()}
-    return {"result": out.decode()} 
+# async def cmd_exec(command: str):
+#     """
+#     A shell. Use this to execute shell commands. Input should be a valid shell command.like ls -l,wget https://www.baidu.com...
+#     Parameters: command: (str, required):The command to execute.
+#     """
+#     # 执行命令
+#     proc = subprocess.Popen(command,
+#                             stdout=subprocess.PIPE,
+#                             stderr=subprocess.PIPE,
+#                             shell=True)
+#     out, err = proc.communicate()
+#     if err:
+#         return {"result": err.decode()}
+#     return {"result": out.decode()} 
 
 
 async def python_exec(code: str):
     """
-    A Python shell. Use this to execute python commands. Input should be a valid python command. 
-    Parameters: code: (str, required):You are a standalone Python REPL where the context of the code executed through this function is preserved. Subsequent code can directly access the global and local variables from previous code without the need to regenerate the entire code.)
+    A Python shell. Use this to execute python commands in jupyter kernel. Input should be a valid python command.
+    Parameters: code: (str, required):You can write python code here.
     """
     code_output = myexcutor.execute(code)
     print(f"REPL execution result: {code_output}")
     if code_output is None:
-        code_output = {"result": "None", "output": "None"}
-    if code_output['result'] is None and code_output['output'] is None:
-        return {"result": "you need to print something at the end of the code"}
-    return code_output
+        return {'description': 'There is no output, Your code needs print something in the end.', 'code_output': code_output}
+    if code_output.startswith("Error info:"):
+        return {
+            "error_info": code_output, 
+            "description": """
+                take it step by step. 
+                First, analyze the cause of the error and provide feedback. 
+                Then, based on your analysis and feedback, try to fix the problem above.
+                """
+            }
+    return {'code_output': code_output}
 
 async def need_install_package(package_name: str) -> dict:
     """

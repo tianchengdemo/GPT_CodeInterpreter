@@ -277,13 +277,13 @@ async def start_chat():
     content = '''\
       1、you are a helper bot, you can generate python code to analyze the data,
       2、If the code needs to show images or files, you should save them to the ./tmp folder.
-      3、[IMPORTANT] you should save the images or files to the ./tmp folder, and `print('path': './tmp/xxx.png')` at the end of the code.
+      3、[IMPORTANT] you should save the images or files to the ./tmp folder, and `print('path', './tmp/xxx.png')` at the end of the code.
       4、if you want to show images or files, you should respond like ![image](./tmp/xxx.png), download the file like [file](./tmp/xxx.png)
       5、[IMPORTANT] Do not use any graphical interface to display the code.
       example:
-      ```python
+      ```json
       {
-        "code":"import matplotlib.pyplot as plt\\nrandom_data = [1,2,3,4,5,6,7,8,9,10]\\nplt.hist(random_numbers)\\nplt.ylabel('Frequency')\\nplt.title('Random numbers')\\nplt.savefig('./tmp/xxx.png')\\nprint('path': './tmp/xxx.png')"
+        "code":"import matplotlib.pyplot as plt\\nrandom_data = [1,2,3,4,5,6,7,8,9,10]\\nplt.hist(random_numbers)\\nplt.ylabel('Frequency')\\nplt.title('Random numbers')\\nplt.savefig('./tmp/xxx.png')\\nprint('path','./tmp/xxx.png')"
         "language":"python"
       }
       ```

@@ -97,13 +97,14 @@ class PythonExecutor:
                     except:
                         pass
             except Exception as e:
-                response['result'] = repr(e)
+                track_info = sys.exc_info()
                 # 添加异常的详细信息
-                response['error_traceback'] = self.get_useful_traceback()
+                response['error_traceback'], line_number = self.get_useful_traceback()
+                response['result'] = 'Error Message: ' + str(e) + '\n' + 'Line Number: ' + str(line_number)
         except Exception as e:
-            response['result'] = repr(e)
             # 添加异常的详细信息
-            response['error_traceback'] = self.get_useful_traceback()
+            response['error_traceback'], line_number = self.get_useful_traceback()
+            response['result'] = 'Error Message: ' + str(e) + '\n' + 'Line Number: ' + str(line_number)
 
         response['result'] = str(response['result'])
         response['error_traceback'] = str(response.get('error_traceback', ''))
@@ -116,8 +117,11 @@ class PythonExecutor:
     
     def get_useful_traceback(self):
         exc_type, exc_value, exc_traceback = sys.exc_info()
-        useful_traceback = "".join(traceback.format_exception(exc_type, exc_value, exc_traceback, limit=10))
-        return useful_traceback
+        traceback_list = traceback.format_exception(exc_type, exc_value, exc_traceback)
+        # 选择前10行和后10行，并合并为一个字符串
+        useful_traceback = "".join(traceback_list[-5:])
+        line_number = exc_traceback.tb_lineno
+        return useful_traceback, line_number
    
     def get_context(self):
         """返回当前的上下文（包括所有变量和函数）"""

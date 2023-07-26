@@ -8,17 +8,13 @@ GPT_CodeInterpreter is an AI-driven project designed to carry out various tasks 
 
 ![image](https://github.com/boyueluzhipeng/GPT_CodeInterpreter/assets/39090632/ce360bb1-1347-4a96-a345-d15ddef618c2)
 
-![image](https://github.com/boyueluzhipeng/GPT_CodeInterpreter/assets/39090632/dcc68daa-776c-441b-9fc5-f7d0230e570e)
+![20230726150533](https://github.com/boyueluzhipeng/GPT_CodeInterpreter/assets/39090632/dabdf91f-0fc7-4794-bcdf-033f3e2dbafa)
 
 
 ## Video Demonstrations 🎥
 
 https://github.com/boyueluzhipeng/GPT_CodeInterpreter/assets/39090632/d55503f7-f51c-4d0a-a284-e811eb5a98ac
 
-
-## Help To Code Vue Project
-
-https://github.com/boyueluzhipeng/GPT_CodeInterpreter/assets/39090632/ceedf044-e48b-44af-bfaa-ad7b540fc60c
 
 
 

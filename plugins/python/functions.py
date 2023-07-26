@@ -39,7 +39,7 @@ async def python_exec(code: str):
             "description": """take it step by step. 
                 Now you should analyze the cause of the error and provide feedback first.
                 Then, you can try to solve the problem by yourself:
-                1. If the issue can be resolved by fixing the code, proceed directly to the next step of code repair and execute it.
+                1. If the problem can be solved by fixing the code, please directly use the python_exec function to rerun the repaired code without returning any corresponding code.
                 2. If there is a missing dependency, use dependency installation.
                 3. If there is a file missing, consult on how to obtain the corresponding file instead of directly requesting to call the upload file function.""",
                 "status": "error"

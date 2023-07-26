@@ -275,17 +275,6 @@ async def start_chat():
         name="Chatbot",
         url="https://avatars.githubusercontent.com/u/128686189?s=400&u=a1d1553023f8ea0921fba0debbe92a8c5f840dd9&v=4",
     ).send()
-    
-    template = """Origin Code: {origin_code},
-        Error Info: {error_info},
-        Analysis the cause of the error step by step, and provide feedback."""
-
-    prompt = PromptTemplate(template=template, input_variables=["origin_code", "error_info"])
-
-    llm_chain = LLMChain(prompt=prompt, llm=OpenAI(temperature=0), verbose=True)
-
-    # Store the chain in the user session
-    cl.user_session.set("llm_chain", llm_chain)
 
 
 @cl.on_message

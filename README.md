@@ -4,11 +4,12 @@ GPT_CodeInterpreter is an AI-driven project designed to carry out various tasks 
 
 ## Pictures About GPT_CodeInterpreter
 
+![20230726150533](https://github.com/boyueluzhipeng/GPT_CodeInterpreter/assets/39090632/dabdf91f-0fc7-4794-bcdf-033f3e2dbafa)
+
 ![image](https://github.com/boyueluzhipeng/GPT_CodeInterpreter/assets/39090632/c5fac81b-7bbf-4bb8-83fe-4a0423eb3f86)
 
 ![image](https://github.com/boyueluzhipeng/GPT_CodeInterpreter/assets/39090632/ce360bb1-1347-4a96-a345-d15ddef618c2)
 
-![20230726150533](https://github.com/boyueluzhipeng/GPT_CodeInterpreter/assets/39090632/dabdf91f-0fc7-4794-bcdf-033f3e2dbafa)
 
 
 ## Video Demonstrations 🎥

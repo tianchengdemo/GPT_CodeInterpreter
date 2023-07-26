@@ -10,7 +10,6 @@ import importlib
 import asyncio
 from functions.MakeRequest import make_request, make_request_chatgpt_plugin
 import globale_values as gv
-from langchain import PromptTemplate, OpenAI, LLMChain
 
 
 openai.api_key = os.environ.get("OPENAI_API_KEY")

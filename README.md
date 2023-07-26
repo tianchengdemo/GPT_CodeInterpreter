@@ -2,6 +2,12 @@
 
 GPT_CodeInterpreter is an AI-driven project designed to carry out various tasks related to code interpretation. It is built on a plugin architecture that can easily extend new features.
 
+## Pictures About GPT_CodeInterpreter
+
+![image](https://github.com/boyueluzhipeng/GPT_CodeInterpreter/assets/39090632/c5fac81b-7bbf-4bb8-83fe-4a0423eb3f86)
+
+![image](https://github.com/boyueluzhipeng/GPT_CodeInterpreter/assets/39090632/ce360bb1-1347-4a96-a345-d15ddef618c2)
+
 ## Video Demonstrations 🎥
 
 https://github.com/boyueluzhipeng/GPT_CodeInterpreter/assets/39090632/d55503f7-f51c-4d0a-a284-e811eb5a98ac

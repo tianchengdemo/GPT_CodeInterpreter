@@ -173,7 +173,7 @@ async def on_message(user_message: object):
                 "name": function_name,
                 "content": json.dumps(function_response),
             })
-            language = os.environ.get("OPENAI_LANGUAGE") or "chinese"
+            language = os.environ.get("LANGUAGE") or "chinese"
             message_history.append({
                 "role": "user",
                 "content": str(description) + "\n\n" + "Please answer me in " + language
@@ -262,7 +262,7 @@ async def start_chat():
       ```
       [IMPORTANT] Do not use plt.show() or cv2.imshow() or any graphical interface to display in the code.\
     '''
-    language = os.environ.get("OPENAI_LANGUAGE") or "chinese"
+    language = os.environ.get("LANGUAGE") or "chinese"
     cl.user_session.set(
         "message_history",
         [{

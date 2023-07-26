@@ -5,7 +5,7 @@ import chainlit as cl
 
 async def need_file_upload(save_path: str=""):
     """
-    When the user's question mentions handling files, you need to upload files, you can call this function.
+    When the user's question refers to managing files and requires file uploads, you can invoke this function.
     Parameters: save_path: The path of the file.(optional)
     """
     if not os.path.exists('./tmp'):
@@ -60,4 +60,3 @@ async def need_file_upload(save_path: str=""):
 #                      elements=elments).send()  # type: ignore
 
 #     return {'description': '图片已经显示成功了，下面的回复中不再需要展示它了'}
-    

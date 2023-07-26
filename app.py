@@ -10,6 +10,7 @@ import importlib
 import asyncio
 from functions.MakeRequest import make_request, make_request_chatgpt_plugin
 import globale_values as gv
+from langchain import PromptTemplate, OpenAI, LLMChain
 
 
 openai.api_key = os.environ.get("OPENAI_API_KEY")
@@ -86,9 +87,6 @@ async def on_message(user_message: object):
     message_history = cl.user_session.get("message_history")
     message_history.append({"role": "user", "content": user_message})
     cur_iter = 0
-
-    err_count = 0
-
     while cur_iter < MAX_ITER:
 
         openai_message = {"role": "", "content": ""}
@@ -121,16 +119,6 @@ async def on_message(user_message: object):
         except Exception as e:
             print(e)
             cur_iter += 1
-            err_count += 1
-            if err_count > 4:
-                cl.user_session.set("user_plugin_api_info", None)
-                # await cl.Message(
-                #     author="system",
-                #     content="您的插件已经失效，已经为您清除,请重新绑定其他插件",
-                #     indent=1,
-                #     language="json",
-                #     ).send()
-                break
             await asyncio.sleep(1)
             continue
 
@@ -167,64 +155,38 @@ async def on_message(user_message: object):
                 function_name, arguments)
         except Exception as e:
             print(e)
-            try:
-                # 分割function_name,_分割,如果个数不是3个，就报错
-                function_name_split = function_name.split('_')
-                if len(function_name_split) < 3:
-                    print('function_name_split is not 3')
-                    is_gpt_plugin = False
-                    if gv.chatgpt_plugin_info is None:
-                        with open('plugins/serverplugin/my_apis.json', 'r') as f:
-                            gv.chatgpt_plugin_info = json.load(f)
-                    plugin_info = gv.chatgpt_plugin_info
-                    print('共有{}个插件'.format(len(plugin_info)))
-                    for item in plugin_info:
-                        for api in item['apis']:
-                            if api['name'] == function_name:
-                                id = item['id']
-                                name = api['name']
-                                arguments = json.dumps(arguments)
-                                function_response = make_request_chatgpt_plugin(
-                                    id, name, arguments)
-                                is_gpt_plugin = True
-                                break
-                        if is_gpt_plugin:
-                            break
-                else:
-                    method = function_name_split[-2]
-                    url_md5 = function_name_split[-1]
-                    request_function_name = '_'.join(function_name_split[:-2])
-                    print(method, url_md5, request_function_name)
-                    # 通过url_md5去获取url
-                    if user_plugin_api_info is None:
-                        raise Exception('user_plugin_api_info is None')
-                    for item in user_plugin_api_info:
-                        print(item)
-                        if item['url_md5'] == url_md5:
-                            url = item['url']
-                            function_response = make_request(url, method,
-                                                             request_function_name,
-                                                             arguments)
-                            print(function_response)
-                            # 如果是
-                            if isinstance(function_response, (tuple, list, dict)):
-                                function_response = json.dumps(function_response)
-                            break
-
-            except Exception as e:
-                print(e)
-                break
+            raise e 
         print("==================================")
         print(function_response)
         if type(function_response) != str:
             function_response = str(function_response)
         
         message_history.append(openai_message)
-        message_history.append({
-            "role": "function",
-            "name": function_name,
-            "content": function_response,
-        })
+        
+        if function_name == 'python_exec' and 'status' in function_response and 'error_info' in function_response and 'error' in function_response:
+            # function_response 中取出 description 并从中 去掉这个key
+            print("🚀" * 20)
+            function_response = json.loads(function_response)
+            description = function_response['description']
+            del function_response['description']
+            message_history.append({
+                "role": "function",
+                "name": function_name,
+                "content": json.dumps(function_response),
+            })
+            language = os.environ.get("OPENAI_LANGUAGE") or "chinese"
+            message_history.append({
+                "role": "user",
+                "content": str(description) + "\n\n" + "Please answer me in " + language
+            })
+            print("🚀" * 20)
+        else:
+            message_history.append({
+                "role": "function",
+                "name": function_name,
+                "content": function_response,
+            })
+            
         print("==================================")
         print(message_history)
         print("==================================")
@@ -272,6 +234,18 @@ async def process_new_delta(new_delta, openai_message, content_ui_message,
     return openai_message, content_ui_message, function_ui_message
 
 
+async def analyze_error(error_info: str):
+    """
+    Analyze the cause of the error and provide feedback.
+    Parameters:
+        origin_code: The original code.(required)
+        error_info: The error info.(required)
+    """
+    llm_chain = cl.user_session.get("llm_chain")
+    res = await llm_chain.acall(error_info, callbacks=[cl.AsyncLangchainCallbackHandler()])
+    return res
+
+
 @cl.on_chat_start
 async def start_chat():
     content = '''\
@@ -302,6 +276,17 @@ async def start_chat():
         name="Chatbot",
         url="https://avatars.githubusercontent.com/u/128686189?s=400&u=a1d1553023f8ea0921fba0debbe92a8c5f840dd9&v=4",
     ).send()
+    
+    template = """Origin Code: {origin_code},
+        Error Info: {error_info},
+        Analysis the cause of the error step by step, and provide feedback."""
+
+    prompt = PromptTemplate(template=template, input_variables=["origin_code", "error_info"])
+
+    llm_chain = LLMChain(prompt=prompt, llm=OpenAI(temperature=0), verbose=True)
+
+    # Store the chain in the user session
+    cl.user_session.set("llm_chain", llm_chain)
 
 
 @cl.on_message

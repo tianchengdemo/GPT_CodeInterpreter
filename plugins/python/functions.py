@@ -29,7 +29,7 @@ async def python_exec(code: str):
     A Python shell. Use this to execute python commands in jupyter kernel. Input should be a valid python command.
     Parameters: code: (str, required):You can write python code here.
     """
-    code_output = myexcutor.execute(code)
+    code_output = await myexcutor.execute(code)
     print(f"REPL execution result: {code_output}")
     if code_output is None:
         return {'description': 'There is no output, Your code needs print something in the end.', 'code_output': code_output}

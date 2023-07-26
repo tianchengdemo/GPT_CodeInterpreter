@@ -3,10 +3,10 @@ import os
 import chainlit as cl
 
 
-async def need_file_upload(save_path: str=""):
+async def need_file_upload():
     """
     When the user's question refers to managing files and requires file uploads, you can invoke this function.
-    Parameters: save_path: The path of the file.(optional)
+    Parameters: None
     """
     if not os.path.exists('./tmp'):
         os.mkdir('./tmp')
@@ -24,7 +24,7 @@ async def need_file_upload(save_path: str=""):
             # More MIME types here as needed.
         ]).send()
     file = files[0]
-    
+    save_path = ""
     # 保存文件到paths目录下
     # 判断paths目录是否存在
     if save_path == "":
@@ -39,6 +39,22 @@ async def need_file_upload(save_path: str=""):
     return {
         'description': f"upload file ./tmp/{save_path} success",
     }
+    
+async def need_rename_file(old_path: str, new_path: str):
+    """
+    When the user's question refers to managing files and requires file rename, you can invoke this function.
+    Parameters: old_path: The old path of the file.(required)
+    new_path: The new path of the file.(required)
+    """
+    # 判断old_path是否存在
+    if not os.path.exists(old_path):
+        return {'description': f"{old_path} is not exist"}
+    # 判断new_path是否存在
+    if os.path.exists(new_path):
+        return {'description': f"{new_path} is already exist"}
+    # 重命名文件
+    os.rename(old_path, new_path)
+    return {'description': f"rename file {old_path} to {new_path} success"}
 
 
 # async def show_images(title: str,paths: str):

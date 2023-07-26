@@ -8,6 +8,9 @@ GPT_CodeInterpreter is an AI-driven project designed to carry out various tasks 
 
 ![image](https://github.com/boyueluzhipeng/GPT_CodeInterpreter/assets/39090632/ce360bb1-1347-4a96-a345-d15ddef618c2)
 
+![image](https://github.com/boyueluzhipeng/GPT_CodeInterpreter/assets/39090632/dcc68daa-776c-441b-9fc5-f7d0230e570e)
+
+
 ## Video Demonstrations 🎥
 
 https://github.com/boyueluzhipeng/GPT_CodeInterpreter/assets/39090632/d55503f7-f51c-4d0a-a284-e811eb5a98ac
@@ -78,3 +81,4 @@ For any inquiries or collaboration opportunities, you can reach me via email at 
 This project is licensed under the terms of the MIT license. 📜
 
 This README now includes the link to the `env.md` file, indicated with the "Understanding Environment Variables" section. It also features an emoji flag (🔑) to highlight the importance of configuring environment variables for the project. If you have any more requests or need further assistance, please let me know!
+

@@ -1,3 +1,5 @@
+import asyncio
+from concurrent.futures import ThreadPoolExecutor
 import time
 from jupyter_client.manager import KernelManager
 from queue import Empty
@@ -18,8 +20,10 @@ class CodeExecutor:
         # 创建一个客户端并连接到新的内核
         self.kc = self.km.blocking_client()
         self.kc.start_channels()
+        # 创建一个线程池执行器来运行阻塞操作
+        self.executor = ThreadPoolExecutor(max_workers=1)
 
-    def execute(self, code):
+    async def execute(self, code):
         # 执行代码
         msg_id = self.kc.execute(code)
 
@@ -29,7 +33,8 @@ class CodeExecutor:
         # 等待执行结果
         while True:
             try:
-                msg = self.kc.get_iopub_msg(timeout=60)
+                # 在新的线程中运行 get_iopub_msg 方法，并在异步函数中等待它的完成
+                msg = await asyncio.get_event_loop().run_in_executor(self.executor, self.kc.get_iopub_msg, 60)
             except Empty:
                 return None
             else:
@@ -69,6 +74,8 @@ class CodeExecutor:
         time.sleep(2)
         self.kc.stop_channels()
         self.km.shutdown_kernel()
+        # 关闭线程池执行器
+        self.executor.shutdown()
         
         
 

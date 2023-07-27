@@ -79,6 +79,7 @@ MAX_ITER = 100
 
 async def on_message(user_message: object):
     global is_stop
+    is_stop = False
     print("==================================")
     print(user_message)
     print("==================================")
@@ -86,7 +87,7 @@ async def on_message(user_message: object):
     message_history = cl.user_session.get("message_history")
     message_history.append({"role": "user", "content": user_message})
     cur_iter = 0
-    while cur_iter < MAX_ITER:
+    while cur_iter < MAX_ITER and not is_stop:
 
         openai_message = {"role": "", "content": ""}
         function_ui_message = None
@@ -110,7 +111,7 @@ async def on_message(user_message: object):
                     temperature=0):  # type: ignore
                 new_delta = stream_resp.choices[0]["delta"]
                 if is_stop:
-                    is_stop = False
+                    is_stop = True
                     cur_iter = MAX_ITER
                     break
                 openai_message, content_ui_message, function_ui_message = await process_new_delta(
@@ -279,6 +280,72 @@ async def start_chat():
 
 @cl.on_message
 async def run_conversation(user_message: object):
+    if '/upload' == str(user_message):
+        if not os.path.exists('./tmp'):
+            os.mkdir('./tmp')
+        files = await cl.AskFileMessage(
+            content="Please upload a file.",
+            max_size_mb=10,
+            accept=[
+                "text/plain",
+                "image/png",
+                "image/jpeg",
+                "application/pdf",
+                "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",  # for .xlsx files
+                "application/vnd.ms-excel",  # for .xls files
+                "text/csv",  # for .csv files
+                "application/json",  # for .json files
+                "application/zip",  # for .zip files
+                "application/x-tar",  # for .tar files
+                "application/gzip",  # for .gz files
+                "application/x-bzip2",  # for .bz2 files
+                "application/x-7z-compressed",  # for .7z files
+                "application/yaml",  # for .yaml files
+                "application/x-yaml",  # for .yml files
+                "text/markdown",  # for .md files
+                "text/html",  # for .html files
+                "text/css",  # for .css files
+                "text/javascript",  # for .js files
+                "text/x-python",  # for .py files
+                "text/x-c",  # for .c files
+                "text/x-c++",  # for .cpp files
+                "text/x-java",  # for .java files
+                "text/x-go",  # for .go files
+                "text/x-php",  # for .php files
+                "text/x-ruby",  # for .rb files
+                "text/x-rust",  # for .rs files
+                "text/x-sql",  # for .sql files
+                "text/x-swift",  # for .swift files
+                "text/x-typescript",  # for .ts files
+                "text/x-kotlin",  # for .kt files
+                "text/yaml",  # for .yaml files
+                "text/x-yaml",  # for .yml files
+                "text/xml",  # for .xml files
+            ]).send()
+        file = files[0]
+        save_path = ""
+        # 保存文件到paths目录下
+        # 判断paths目录是否存在
+        if save_path == "":
+            save_path = file.name
+        file_path = f"./tmp/{save_path}"
+        # 保存文件
+        content = file.content
+        # 保存文件
+        # content是bytes类型
+        with open(file_path, "wb") as f:
+            f.write(content)
+        message_history = cl.user_session.get("message_history")
+        message_history.append({
+            "role": "user",
+            "content": f"upload file ./tmp/{save_path} success"
+        })
+        await cl.Message(
+            author="system",
+            content=f"upload file ./tmp/{save_path} success",
+        ).send()
+        return
+    
     await on_message(user_message)
 
 

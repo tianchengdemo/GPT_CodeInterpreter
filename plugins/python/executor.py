@@ -13,17 +13,28 @@ def remove_ansi_escape_sequences(s):
 
 class CodeExecutor:
     def __init__(self):
-        # 创建一个新的内核管理器
-        self.km = KernelManager()
-        self.km.start_kernel()
+        self.km = None
+        self.kc = None
+        self.executor = None
+        self.timeout_task = None
 
-        # 创建一个客户端并连接到新的内核
-        self.kc = self.km.blocking_client()
-        self.kc.start_channels()
-        # 创建一个线程池执行器来运行阻塞操作
-        self.executor = ThreadPoolExecutor(max_workers=1)
+    async def start_kernel(self):
+        if self.km is None or self.kc is None or self.executor is None:
+            self.km = KernelManager()
+            self.km.start_kernel()
+            self.kc = self.km.blocking_client()
+            self.kc.start_channels()
+            self.executor = ThreadPoolExecutor(max_workers=1)
+            self.timeout_task = asyncio.create_task(self.auto_shutdown())
+
+    async def auto_shutdown(self):
+        await asyncio.sleep(900)  # 15 minutes
+        self.shutdown()
 
     async def execute(self, code):
+        if self.timeout_task is not None:
+            self.timeout_task.cancel()
+        await self.start_kernel()
         # 执行代码
         msg_id = self.kc.execute(code)
 
@@ -68,21 +79,26 @@ class CodeExecutor:
                         if len(all_msgs) > 3:
                             all_msgs = all_msgs[-3:]
                         return '\n'.join(all_msgs)
+        self.timeout_task = asyncio.create_task(self.auto_shutdown())
                    
     def shutdown(self):
-        # 关闭通道和内核
-        time.sleep(2)
-        self.kc.stop_channels()
-        self.km.shutdown_kernel()
-        # 关闭线程池执行器
-        self.executor.shutdown()
-        
-        
+        if self.km is not None and self.kc is not None and self.executor is not None:
+            time.sleep(2)
+            self.kc.stop_channels()
+            self.km.shutdown_kernel()
+            self.executor.shutdown()
+            self.km = None
+            self.kc = None
+            self.executor = None
+            self.timeout_task = None
 
-if __name__ == "__main__":
+
+async def main():
     executor = CodeExecutor()
-    res = executor.execute("""import matplotlib.pyplot as plt\n\nrandom_numbers = [42, 25, 69, 66, 42, 65, 73, 4, 74, 20]\n\nplt.plot(random_numbers)\nplt.xlabel('Index')\nplt.ylabel('Value')\nplt.title('Random Numbers')\nplt.savefig('./tmp/random_numbers.png')\nprint('path': './tmp/random_numbers.png')""")
+    res = await executor.execute("""import matplotlib.pyplot as plt\n\nrandom_numbers = [42, 25, 69, 66, 42, 65, 73, 4, 74, 20]\n\nplt.plot(random_numbers)\nplt.xlabel('Index')\nplt.ylabel('Value')\nplt.title('Random Numbers')\nplt.savefig('./tmp/random_numbers.png')\nprint('path': './tmp/random_numbers.png')""")
     print("====================================")
     print(res)
     print("====================================")
-    executor.shutdown()
+
+if __name__ == "__main__":
+    asyncio.run(main())

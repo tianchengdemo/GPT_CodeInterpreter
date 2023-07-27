@@ -14,9 +14,15 @@ To get started, visit the [https://chat.zhipenglu.repl.co](https://chat.zhipengl
 ## Enjoy! 🎉
 I hope you find this chatbot useful and fun to use. Enjoy!
 
-## Feedback 
-- **The Test Website is hosted on Replit. And I have no time to maintain it. So it may be down sometimes. If you want to test the full functionality of this project, please clone this project and run it on your own machine.**
-- **If the test website is down, please let me know by opening an issue. I'll try to fix it as soon as possible. If you have any suggestions or feedback, please let me know by opening an issue. I'll try to respond as soon as possible.**/
+## 📣 Feedback & Support
+
+🔧 **Test Website Status:** The test website is hosted on Replit and was set up in a hurry. As such, it might experience occasional downtime or restarts. Rest assured, I'm actively working on improving its stability over time.
+
+📬 **Encountered an Issue?** If the test website is down or if you encounter any issues, please don't hesitate to [open an issue](https://github.com/boyueluzhipeng/GPT_CodeInterpreter/issues). I'll do my best to address it as promptly as possible.
+
+💡 **Suggestions or Feedback?** Your thoughts matter! If you have any suggestions or feedback, I'm all ears. Please share your ideas by [opening an issue](https://github.com/boyueluzhipeng/GPT_CodeInterpreter/issues). I strive to respond and incorporate valuable feedback as quickly as I can.
+
+Thank you for your understanding and support! 🙏
 
 
 

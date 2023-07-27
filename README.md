@@ -2,6 +2,20 @@
 
 GPT_CodeInterpreter is an AI-driven project designed to carry out various tasks related to code interpretation. It is built on a plugin architecture that can easily extend new features.
 
+# Welcome to my project! 👋
+I'm glad to introduce you to a project I've been working on. It's a chatbot hosted at [this link](https://chat.zhipenglu.repl.co). 
+## How to Use 📚
+To get started, visit the [https://chat.zhipenglu.repl.co](https://chat.zhipenglu.repl.co) and type in your query or command. Here are some commands you can use:
+- **/set_api_key** - Set your OPENAI_API_KEY 🔑
+- **/set_model** - Set your OPENAI_MODEL 🤖
+- **/set_language** - Set your language 🌍
+- **/set_api_base** - Set your OPENAI_API_BASE 🌐
+- **/help** - Show this help 📘
+## Enjoy! 🎉
+I hope you find this chatbot useful and fun to use. Enjoy!
+
+
+
 ## Pictures About GPT_CodeInterpreter
 
 ![20230726150533](https://github.com/boyueluzhipeng/GPT_CodeInterpreter/assets/39090632/dabdf91f-0fc7-4794-bcdf-033f3e2dbafa)

@@ -5,7 +5,7 @@ import chainlit as cl
 
 async def need_file_upload():
     """
-    When the user's question involves file management and requires uploading files, you can invoke this function. Do not call this function unless the user explicitly requests to upload.
+    Unless the user actively requests to upload and includes the words 'upload file' or 'upload image' in their input, do not invoke this function.
     Parameters: None
     """
     if not os.path.exists('./tmp'):

@@ -1,3 +1,4 @@
+import uuid
 import openai
 import json
 import ast
@@ -281,6 +282,7 @@ async def start_chat():
         author="Chatbot",
         content=get_text(language, "upload_guide"),
     ).send()
+    cl.user_session.set("random_user_id", str(uuid.uuid4()))
         
 
 

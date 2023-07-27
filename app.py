@@ -353,11 +353,11 @@ async def run_conversation(user_message: object):
             f.write(content)
         message_history = cl.user_session.get("message_history")
         message_history.append({
-            "role": "user",
+            "role": "assistant",
             "content": f"upload file ./tmp/{save_path} success"
         })
         await cl.Message(
-            author="system",
+            author="Chatbot",
             content=f"🚀 文件 `./tmp/{save_path}` 已成功上传 🎉",
         ).send()
         return

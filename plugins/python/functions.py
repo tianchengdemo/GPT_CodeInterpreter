@@ -1,11 +1,12 @@
 import asyncio
 import subprocess
 import sys
+import uuid
 import chainlit as cl
 import os
 from .executor import CodeExecutor
 
-myexcutor = CodeExecutor()
+myexcutor_map = {}
 
 
 # async def cmd_exec(command: str):
@@ -29,6 +30,15 @@ async def python_exec(code: str):
     A Python shell. Use this to execute python commands in jupyter kernel. Input should be a valid python command.
     Parameters: code: (str, required):You can write python code here.
     """
+    global myexcutor_map
+    random_user_id = cl.user_session.get('random_user_id')
+    if random_user_id is None:
+        random_user_id = cl.user_session['random_user_id'] = str(uuid.uuid4())
+    myexcutor = myexcutor_map.get(random_user_id, None)
+    if myexcutor is None:
+        myexcutor = CodeExecutor()
+        print(f"create new executor for user {random_user_id}")
+        myexcutor_map[random_user_id] = myexcutor
     code_output = await myexcutor.execute(code)
     print(f"REPL execution result: {code_output}")
     if code_output is None:

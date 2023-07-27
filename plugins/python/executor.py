@@ -28,7 +28,7 @@ class CodeExecutor:
             self.timeout_task = asyncio.create_task(self.auto_shutdown())
 
     async def auto_shutdown(self):
-        await asyncio.sleep(900)  # 15 minutes
+        await asyncio.sleep(180)  # 15 minutes
         self.shutdown()
 
     async def execute(self, code):
@@ -95,10 +95,18 @@ class CodeExecutor:
 
 async def main():
     executor = CodeExecutor()
-    res = await executor.execute("""import matplotlib.pyplot as plt\n\nrandom_numbers = [42, 25, 69, 66, 42, 65, 73, 4, 74, 20]\n\nplt.plot(random_numbers)\nplt.xlabel('Index')\nplt.ylabel('Value')\nplt.title('Random Numbers')\nplt.savefig('./tmp/random_numbers.png')\nprint('path': './tmp/random_numbers.png')""")
+    res = await executor.execute("""import os\nprint(os.getcwd())\nfrom PIL import Image, ImageFilter\n\n# Open an image file\nimg = Image.open('../../tmp/1.png')\n# Apply a blur filter to the image\nblurred = img.filter(ImageFilter.BLUR)\n# Save the blurred image\nblurred.save('blurred.png')\nprint('path', './blurred.png')""")
     print("====================================")
     print(res)
     print("====================================")
 
 if __name__ == "__main__":
     asyncio.run(main())
+    # from PIL import Image, ImageFilter
+    # # Open an image file
+    # img = Image.open('../../tmp/1.png')
+    # # Apply a blur filter to the image
+    # blurred = img.filter(ImageFilter.BLUR)
+    # # Save the blurred image
+    # blurred.save('./tmp/blurred.png')
+    # print('path', './tmp/blurred.png')

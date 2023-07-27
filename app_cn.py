@@ -10,6 +10,7 @@ import importlib
 import asyncio
 from functions.MakeRequest import make_request, make_request_chatgpt_plugin
 import globale_values as gv
+from language.gettext import get_text
 
 
 openai.api_key = os.environ.get("OPENAI_API_KEY")
@@ -278,19 +279,7 @@ async def start_chat():
     ).send()
     await cl.Message(
         author="Chatbot",
-        content="""
-## 📁 文件上传指南
-你好！如果你需要上传文件，你可以使用 `/upload` 指令。这个指令会帮助你将文件上传到我们的系统。🚀
-## 🐾 步骤
-1. 在聊天框中输入 `/upload` 指令 🖥️
-2. 按下回车键 ➡️
-3. 在弹出的窗口中，选择你需要上传的文件 📂
-4. 点击 "上传" 按钮，等待文件上传完成 ⏳
-💡 提示：请确保你的文件不包含任何敏感信息，因为我们的系统会保存你上传的文件。
-## 🎉 上传完成
-一旦文件上传成功，你会在聊天窗口中看到一个确认消息，证明你的文件已经成功上传。🏁
-如果你在上传过程中遇到任何问题，或者需要更多帮助，随时向我们提问。我们会尽快回答你的问题。📬
-祝你一切顺利！🍀""",
+        content=get_text(language, "upload_guide"),
     ).send()
         
 
@@ -304,40 +293,7 @@ async def run_conversation(user_message: object):
             content="Please upload a file.",
             max_size_mb=10,
             accept=[
-                "text/plain",
-                "image/png",
-                "image/jpeg",
-                "application/pdf",
-                "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",  # for .xlsx files
-                "application/vnd.ms-excel",  # for .xls files
-                "text/csv",  # for .csv files
-                "application/json",  # for .json files
-                "application/zip",  # for .zip files
-                "application/x-tar",  # for .tar files
-                "application/gzip",  # for .gz files
-                "application/x-bzip2",  # for .bz2 files
-                "application/x-7z-compressed",  # for .7z files
-                "application/yaml",  # for .yaml files
-                "application/x-yaml",  # for .yml files
-                "text/markdown",  # for .md files
-                "text/html",  # for .html files
-                "text/css",  # for .css files
-                "text/javascript",  # for .js files
-                "text/x-python",  # for .py files
-                "text/x-c",  # for .c files
-                "text/x-c++",  # for .cpp files
-                "text/x-java",  # for .java files
-                "text/x-go",  # for .go files
-                "text/x-php",  # for .php files
-                "text/x-ruby",  # for .rb files
-                "text/x-rust",  # for .rs files
-                "text/x-sql",  # for .sql files
-                "text/x-swift",  # for .swift files
-                "text/x-typescript",  # for .ts files
-                "text/x-kotlin",  # for .kt files
-                "text/yaml",  # for .yaml files
-                "text/x-yaml",  # for .yml files
-                "text/xml",  # for .xml files
+                "*"
             ]).send()
         file = files[0]
         save_path = ""
@@ -359,7 +315,7 @@ async def run_conversation(user_message: object):
         })
         await cl.Message(
             author="Chatbot",
-            content=f"🚀 文件 `./tmp/{save_path}` 已成功上传 🎉",
+            content=f"{get_text(os.environ.get('LANGUAGE') or 'chinese', 'upload_notification')} ./tmp/{save_path}",
         ).send()
         return
     

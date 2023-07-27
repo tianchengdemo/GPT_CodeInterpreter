@@ -79,6 +79,7 @@ MAX_ITER = 100
 
 async def on_message(user_message: object):
     global is_stop
+    is_stop = False
     print("==================================")
     print(user_message)
     print("==================================")
@@ -86,7 +87,7 @@ async def on_message(user_message: object):
     message_history = cl.user_session.get("message_history")
     message_history.append({"role": "user", "content": user_message})
     cur_iter = 0
-    while cur_iter < MAX_ITER:
+    while cur_iter < MAX_ITER and not is_stop:
 
         openai_message = {"role": "", "content": ""}
         function_ui_message = None
@@ -110,7 +111,7 @@ async def on_message(user_message: object):
                     temperature=0):  # type: ignore
                 new_delta = stream_resp.choices[0]["delta"]
                 if is_stop:
-                    is_stop = False
+                    is_stop = True
                     cur_iter = MAX_ITER
                     break
                 openai_message, content_ui_message, function_ui_message = await process_new_delta(

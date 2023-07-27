@@ -21,7 +21,33 @@ async def need_file_upload():
             "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",  # for .xlsx files
             "application/vnd.ms-excel",  # for .xls files
             "text/csv",  # for .csv files
-            # More MIME types here as needed.
+            "application/json",  # for .json files
+            "application/zip",  # for .zip files
+            "application/x-tar",  # for .tar files
+            "application/gzip",  # for .gz files
+            "application/x-bzip2",  # for .bz2 files
+            "application/x-7z-compressed",  # for .7z files
+            "application/yaml",  # for .yaml files
+            "application/x-yaml",  # for .yml files
+            "text/markdown",  # for .md files
+            "text/html",  # for .html files
+            "text/css",  # for .css files
+            "text/javascript",  # for .js files
+            "text/x-python",  # for .py files
+            "text/x-c",  # for .c files
+            "text/x-c++",  # for .cpp files
+            "text/x-java",  # for .java files
+            "text/x-go",  # for .go files
+            "text/x-php",  # for .php files
+            "text/x-ruby",  # for .rb files
+            "text/x-rust",  # for .rs files
+            "text/x-sql",  # for .sql files
+            "text/x-swift",  # for .swift files
+            "text/x-typescript",  # for .ts files
+            "text/x-kotlin",  # for .kt files
+            "text/yaml",  # for .yaml files
+            "text/x-yaml",  # for .yml files
+            "text/xml",  # for .xml files
         ]).send()
     file = files[0]
     save_path = ""

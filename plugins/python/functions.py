@@ -43,15 +43,14 @@ async def python_exec(code: str):
     print(f"REPL execution result: {code_output}")
     if code_output is None:
         return {'description': 'There is no output, Your code needs print something in the end.', 'code_output': code_output}
-    if code_output.startswith("Error info:"):
+    if code_output.startswith("Error"):
         return {
             "error_info": code_output, 
-            "description": """take it step by step. 
-                Now you should analyze the cause of the error and provide feedback first
-                Then, You can try to solve this problem yourself, unless you cannot solve it on your own, then please decide for yourself how to proceed.
-                1. If the problem can be solved by fixing the code, please directly use the python_exec function to rerun the repaired code without returning any corresponding code.
-                2. If there is a missing dependency, use dependency installation.
-                3. If there is a file missing, consult on how to obtain the corresponding file instead of directly requesting to call the upload file function.""",
+            "description": """take it step by step. Now you should analyze the cause of the error and provide feedback first
+Then, You can try to solve this problem yourself, unless you cannot solve it on your own, then please decide for yourself how to proceed.
+1. If the problem can be solved by fixing the code, please directly use the python_exec function to rerun the repaired code without returning any corresponding code.
+2. If there is a missing dependency, use dependency installation.
+3. If there is a file missing, consult on how to obtain the corresponding file instead of directly requesting to call the upload file function.""",
                 "status": "error"
             }
     return {'code_output': code_output, 'status': 'success'}

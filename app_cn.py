@@ -259,8 +259,7 @@ async def start_chat():
       example:
       ```json
       {
-        "code":"import matplotlib.pyplot as plt\\nrandom_data = [1,2,3,4,5,6,7,8,9,10]\\nplt.hist(random_numbers)\\nplt.ylabel('Frequency')\\nplt.title('Random numbers')\\nplt.savefig('./tmp/xxx.png')\\nprint('path','./tmp/xxx.png')"
-        "language":"python"
+        "code":"import matplotlib.pyplot as plt\nrandom_data = [1,2,3,4,5,6,7,8,9,10]\nplt.hist(random_numbers)\nplt.ylabel('Frequency')\nplt.title('Random numbers')\nplt.savefig('./tmp/xxx.png')\nprint('path','./tmp/xxx.png')"
       }
       ```
       [IMPORTANT] Do not use plt.show() or cv2.imshow() or any graphical interface to display in the code.\

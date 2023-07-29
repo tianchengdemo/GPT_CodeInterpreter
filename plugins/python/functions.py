@@ -28,7 +28,7 @@ myexcutor_map = {}
 async def python_exec(code: str):
     """
     A Python shell. Use this to execute python commands in jupyter kernel. Input should be a valid python command.
-    Parameters: code: (str, required):You can write python code here.
+    Parameters: code: (str, required):You can write Python code snippets here.
     """
     global myexcutor_map
     random_user_id = cl.user_session.get('random_user_id')

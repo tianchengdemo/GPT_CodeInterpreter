@@ -68,6 +68,12 @@ class FunctionManager:
                     )
                 else:
                     parameter_annotation_name = parameter_annotation.lower()
+                
+                # 如果注解是一个枚举类型，解析出枚举的值
+                enum_values = None
+                if parameter_annotation_name.startswith("enum:"):
+                    parameter_annotation_name = "string"
+                    enum_values = parameter_annotation.split(":", 1)[1].split(",")
 
                 # 提取参数描述
                 param_description_pattern = rf"{parameter_name}: (.+)"
@@ -87,6 +93,8 @@ class FunctionManager:
                     "description":
                     param_description
                 }
+                if enum_values is not None:
+                    parameter_description["enum"] = enum_values
                 function_info["parameters"]["properties"][
                     parameter_name] = parameter_description
 

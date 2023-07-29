@@ -4,9 +4,9 @@ images/*
 *__pycache__/*
 **/__pycache__/*
 .chainlit/*
-*.json
-**/*.json
-plugins/*/*.json
+config.json
+**/config.json
+plugins/*/config.json
 tmp/*
 .env
 test/*

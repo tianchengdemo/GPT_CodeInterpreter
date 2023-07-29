@@ -1,9 +1,12 @@
 import asyncio
+import base64
 from concurrent.futures import ThreadPoolExecutor
 import time
 from jupyter_client.manager import KernelManager
 from queue import Empty
 import re
+from PIL import Image
+import io
 
 # 定义移除ANSI转义序列的函数
 def remove_ansi_escape_sequences(s):
@@ -53,7 +56,15 @@ class CodeExecutor:
                     msg_type = msg["msg_type"]
                     content = msg["content"]
                     if msg_type == "execute_result" or msg_type == "display_data":
-                        all_msgs.append(content["data"]["text/plain"])
+                        if "image/png" in content["data"]:
+                            # 存成文件
+                            file_path = f'./tmp/{time.time()}.png'
+                            image_data = base64.b64decode(content['data']["image/png"])
+                            image = Image.open(io.BytesIO(image_data))
+                            image.save(file_path)
+                            all_msgs.append(f'show image: {file_path}')
+                        else:
+                            all_msgs.append(content["data"]["text/plain"])
                     elif msg_type == "stream":
                         all_msgs.append(content["text"])
                     elif msg_type == "error":
@@ -95,10 +106,22 @@ class CodeExecutor:
 
 async def main():
     executor = CodeExecutor()
-    res = await executor.execute("""import os\nprint(os.getcwd())\nfrom PIL import Image, ImageFilter\n\n# Open an image file\nimg = Image.open('../../tmp/1.png')\n# Apply a blur filter to the image\nblurred = img.filter(ImageFilter.BLUR)\n# Save the blurred image\nblurred.save('blurred.png')\nprint('path', './blurred.png')""")
+    res = await executor.execute("""import matplotlib.pyplot as plt
+import numpy as np
+
+# Generate 10 random numbers
+random_numbers = np.random.rand(10)
+
+# Plot the random numbers
+plt.plot(random_numbers)
+
+# Display the plot
+plt.show()                          
+    """)
     print("====================================")
     print(res)
     print("====================================")
+    executor.shutdown()
 
 if __name__ == "__main__":
     asyncio.run(main())

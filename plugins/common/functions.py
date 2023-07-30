@@ -77,7 +77,7 @@ async def need_rename_file(old_path: str, new_path: str):
         return {'description': f"{old_path} is not exist"}
     # 判断new_path是否存在
     if os.path.exists(new_path):
-        return {'description': f"{new_path} is already exist"}
+        os.remove(new_path)
     # 重命名文件
     os.rename(old_path, new_path)
     return {'description': f"rename file {old_path} to {new_path} success"}

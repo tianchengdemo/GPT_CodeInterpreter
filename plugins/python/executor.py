@@ -55,14 +55,24 @@ class CodeExecutor:
                 if msg["parent_header"].get("msg_id") == msg_id:
                     msg_type = msg["msg_type"]
                     content = msg["content"]
+                    print(f"msg_type: {msg_type}, content: {content}")
                     if msg_type == "execute_result" or msg_type == "display_data":
                         if "image/png" in content["data"]:
-                            # 存成文件
-                            file_path = f'./tmp/{time.time()}.png'
-                            image_data = base64.b64decode(content['data']["image/png"])
-                            image = Image.open(io.BytesIO(image_data))
-                            image.save(file_path)
-                            all_msgs.append(f'show image: {file_path}')
+                            # 正则表达式，用于匹配以 .gif 结尾的字符串
+                            gif_pattern = r"'(.*\.gif)'"
+
+                            # 使用正则表达式匹配代码中的 .gif 文件名
+                            gif_filenames = re.findall(gif_pattern, code)
+                            if len(gif_filenames) > 0:
+                                for filename in gif_filenames:
+                                    all_msgs.append(f'show image: {filename}')
+                            else:
+                                # 存成文件
+                                file_path = f'./tmp/{time.time()}.png'
+                                image_data = base64.b64decode(content['data']["image/png"])
+                                image = Image.open(io.BytesIO(image_data))
+                                image.save(file_path)
+                                all_msgs.append(f'show image: {file_path}')
                         else:
                             all_msgs.append(content["data"]["text/plain"])
                     elif msg_type == "stream":

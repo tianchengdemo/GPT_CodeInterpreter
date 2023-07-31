@@ -7,6 +7,7 @@ GPT_CodeInterpreter is an AI-driven project designed to carry out various tasks 
 Our update logs are stored in the [update](./update/) directory. You can click on the links below to view specific updates:
 
 - [Update from August 1, 2023](./update/update_0801.md) 🆕
+  - pip install codebot, then use codebot in the command line,Enjoy !!!!!!!!!!!!!!
   - Introduced a new way to run the code using command line
   - Users only need to install our PyPI package and execute it in the command line
     

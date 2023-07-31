@@ -9,6 +9,9 @@ Our update logs are stored in the [update](./update/) directory. You can click o
 - [Update from August 1, 2023](./update/update_0801.md) 🆕
   - Introduced a new way to run the code using command line
   - Users only need to install our PyPI package and execute it in the command line
+    
+  ![20230731122824](https://github.com/boyueluzhipeng/GPT_CodeInterpreter/assets/39090632/4d7b1078-b452-44f4-918f-8e173aa6b373)
+
 - [Update from July 30, 2023](./update/update_0730.md)
 
 Please check back regularly for our latest updates!
@@ -18,11 +21,8 @@ Please check back regularly for our latest updates!
 # Welcome to my project! 👋
 I'm glad to introduce you to a project I've been working on. It's a chatbot hosted at [this link](https://chat.zhipenglu.repl.co). 
 
-## Backup Link
-In case the main link is not accessible, you can use the backup link: [Backup Link](https://powerful-likely-lamb.ngrok-free.app/)
-
 ## How to Use 📚
-To get started, visit the [https://chat.zhipenglu.repl.co](https://chat.zhipenglu.repl.co) or the [Backup Link](https://powerful-likely-lamb.ngrok-free.app/) and type in your query or command. Here are some commands you can use:
+To get started, visit the [https://chat.zhipenglu.repl.co](https://chat.zhipenglu.repl.co) and type in your query or command. Here are some commands you can use:
 - **/set_api_key** - Set your OPENAI_API_KEY 🔑
 - **/set_model** - Set your OPENAI_MODEL 🤖
 - **/set_language** - Set your language 🌍

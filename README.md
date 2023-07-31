@@ -2,30 +2,33 @@
 
 GPT_CodeInterpreter is an AI-driven project designed to carry out various tasks related to code interpretation. It is built on a plugin architecture that can easily extend new features.
 
-## Latest Update 📣 (July 30, 2023)
+## Update Log 📝
 
-Today, we're thrilled to announce an important enhancement to our Python Code Interpreter. The update brings the interpreter's functionality even closer to the official Python interpreter, providing a robust context of environment variables. This enhancement allows GPT to generate less code, making your coding tasks more efficient and streamlined.
+Our update logs are stored in the [update](./update/) directory. You can click on the links below to view specific updates:
 
-### Reduced Code Generation 📉
+- [Update from August 1, 2023](./update/update_0801.md) 🆕
+  - Introduced a new way to run the code using command line
+  - Users only need to install our PyPI package and execute it in the command line
+- [Update from July 30, 2023](./update/update_0730.md)
 
-One of the most significant improvements is the reduction in the amount of generated code. With this update, we've managed to reduce the code generation by up to 30% for specific functionalities. This means you can now achieve the same results with less code, enhancing readability and maintainability.
+Please check back regularly for our latest updates!
 
-### Before and After Comparison 📊
-
-Here's a visual representation of the reduction in code generation brought by this update:
-
-![Code Reduction Comparison](https://github.com/boyueluzhipeng/GPT_CodeInterpreter/assets/39090632/e3a9447d-995b-4ac3-bf61-6eb467f12d58)
 
 
 # Welcome to my project! 👋
 I'm glad to introduce you to a project I've been working on. It's a chatbot hosted at [this link](https://chat.zhipenglu.repl.co). 
+
+## Backup Link
+In case the main link is not accessible, you can use the backup link: [Backup Link](https://powerful-likely-lamb.ngrok-free.app/)
+
 ## How to Use 📚
-To get started, visit the [https://chat.zhipenglu.repl.co](https://chat.zhipenglu.repl.co) and type in your query or command. Here are some commands you can use:
+To get started, visit the [https://chat.zhipenglu.repl.co](https://chat.zhipenglu.repl.co) or the [Backup Link](https://powerful-likely-lamb.ngrok-free.app/) and type in your query or command. Here are some commands you can use:
 - **/set_api_key** - Set your OPENAI_API_KEY 🔑
 - **/set_model** - Set your OPENAI_MODEL 🤖
 - **/set_language** - Set your language 🌍
 - **/set_api_base** - Set your OPENAI_API_BASE 🌐
 - **/help** - Show this help 📘
+
 ## Enjoy! 🎉
 I hope you find this chatbot useful and fun to use. Enjoy!
 

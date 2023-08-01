@@ -34,6 +34,8 @@ To run this project, you need to follow these steps:
 
 5. Once GPT_CodeInterpreter is installed, you can run the project with the following command: `chainlit run app.py`.
 
+6. If `chainlit run app.py` error to communicate to openai,you can try `chainlit run app_cn.py`. 
+
 Hope this display is more engaging and readable! If you have any other questions or need further assistance, feel free to let me know.
 
 ## Contributing

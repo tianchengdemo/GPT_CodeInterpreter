@@ -4,6 +4,7 @@ import json
 import ast
 import os
 import chainlit as cl
+from litellm import completion
 from functions.FunctionManager import FunctionManager
 import inspect
 import tiktoken
@@ -104,7 +105,7 @@ async def on_message(user_message: object):
                     for i in item['api_info']:
                         functions.append(i)
             print("functions:", functions)
-            for stream_resp in openai.ChatCompletion.create(
+            for stream_resp in completion(
                     model=os.environ.get("OPENAI_MODEL") or "gpt-4",
                     messages=send_message,
                     stream=True,

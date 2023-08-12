@@ -3,6 +3,7 @@ import openai
 import json
 import ast
 import os
+from litellm import acompletion
 import chainlit as cl
 from functions.FunctionManager import FunctionManager
 import inspect
@@ -104,7 +105,7 @@ async def on_message(user_message: object):
                     for i in item['api_info']:
                         functions.append(i)
             print("functions:", functions)
-            async for stream_resp in await openai.ChatCompletion.acreate(
+            async for stream_resp in await acompletion(
                     model=os.environ.get("OPENAI_MODEL") or "gpt-4",
                     messages=send_message,
                     stream=True,

@@ -5,7 +5,6 @@ import re
 import requests
 import openai
 
-
 class FunctionManager:
     def __init__(self, functions=None):
         self.functions = {}

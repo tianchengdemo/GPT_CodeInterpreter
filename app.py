@@ -13,6 +13,22 @@ import asyncio
 from functions.MakeRequest import make_request, make_request_chatgpt_plugin
 import globale_values as gv
 from language.gettext import get_text
+print(cl.__version__ ,type(cl.__version__))
+
+if cl.__version__ == "0.6.2":
+    from chainlit.server import app
+    from fastapi import Request
+    from fastapi.responses import (
+        HTMLResponse,
+        FileResponse,
+    )
+
+    # fastapi 静态文件 ./tmp 
+    from fastapi.staticfiles import StaticFiles
+
+    @app.get("/tmp/{file_path:path}")
+    async def read_file(file_path: str):
+        return FileResponse(f"./tmp/{file_path}")
 
 
 openai.api_key = os.environ.get("OPENAI_API_KEY")
@@ -105,13 +121,16 @@ async def on_message(user_message: object):
                     for i in item['api_info']:
                         functions.append(i)
             print("functions:", functions)
-            async for stream_resp in await acompletion(
+            for stream_resp in await acompletion(
+                    custom_api_base=os.environ.get("OPENAI_API_BASE"),
                     model=os.environ.get("OPENAI_MODEL") or "gpt-4",
                     messages=send_message,
                     stream=True,
                     function_call="auto",
                     functions=functions,
                     temperature=0):  # type: ignore
+                if len(stream_resp.choices) == 0:
+                    continue
                 new_delta = stream_resp.choices[0]["delta"]
                 if is_stop:
                     is_stop = True

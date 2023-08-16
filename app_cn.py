@@ -13,10 +13,7 @@ import asyncio
 from functions.MakeRequest import make_request, make_request_chatgpt_plugin
 import globale_values as gv
 from language.gettext import get_text
-
-
-openai.api_key = os.environ.get("OPENAI_API_KEY")
-openai.api_base = os.environ.get("OPENAI_API_BASE")
+from Dxr_mqtt.dxr_log import *
 
 plugin_dirs = [
     d for d in os.listdir('plugins')
@@ -106,12 +103,20 @@ async def on_message(user_message: object):
                         functions.append(i)
             print("functions:", functions)
             for stream_resp in completion(
+                    custom_api_base=os.environ.get("OPENAI_API_BASE"),
+                    api_key=os.environ.get("OPENAI_API_KEY"),
                     model=os.environ.get("OPENAI_MODEL") or "gpt-4",
                     messages=send_message,
                     stream=True,
                     function_call="auto",
                     functions=functions,
                     temperature=0):  # type: ignore
+                if stream_resp is None:
+                    break
+                if 'choices' not in stream_resp:
+                    break
+                if len(stream_resp.choices) == 0:
+                    continue
                 new_delta = stream_resp.choices[0]["delta"]
                 if is_stop:
                     is_stop = True

@@ -10,3 +10,8 @@ plugins/*/config.json
 tmp/*
 .env
 test/*
+litellm_uuid.txt
+*.png
+*.json
+*.log
+test.py

@@ -31,9 +31,6 @@ if cl.__version__ == "0.6.2":
         return FileResponse(f"./tmp/{file_path}")
 
 
-openai.api_key = os.environ.get("OPENAI_API_KEY")
-openai.api_base = os.environ.get("OPENAI_API_BASE")
-
 plugin_dirs = [
     d for d in os.listdir('plugins')
     if os.path.isdir(os.path.join('plugins', d)) and d != '__pycache__'
@@ -123,6 +120,7 @@ async def on_message(user_message: object):
             print("functions:", functions)
             for stream_resp in await acompletion(
                     custom_api_base=os.environ.get("OPENAI_API_BASE"),
+                    api_key=os.environ.get("OPENAI_API_KEY"),
                     model=os.environ.get("OPENAI_MODEL") or "gpt-4",
                     messages=send_message,
                     stream=True,

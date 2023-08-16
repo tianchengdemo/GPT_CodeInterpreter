@@ -6,7 +6,7 @@ GPT_CodeInterpreter is an AI-driven project designed to carry out various tasks 
 
 Our update logs are stored in the [update](./update/) directory. You can click on the links below to view specific updates:
 - [Update from August 16, 2023](./update/update_0816.md) 🆕
-![image](https://github.com/boyueluzhipeng/GPT_CodeInterpreter/assets/39090632/6b8a5716-2889-4c34-bb1c-5c2e826a552f)
+![image](https://github.com/boyueluzhipeng/GPT_CodeInterpreter/assets/39090632/609da341-9462-4b8a-a672-99d3d1dcbc4b)
 - [Update from August 1, 2023](./update/update_0801.md) 
 - [Update from July 30, 2023](./update/update_0730.md)
 

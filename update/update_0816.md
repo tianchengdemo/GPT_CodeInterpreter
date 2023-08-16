@@ -34,7 +34,7 @@ def my_print(text):
 
 **New Features 😁:**
 1. **Parameter Settings 🎛️:** Conveniently switch between models using left-side settings options.
-![image](https://github.com/boyueluzhipeng/GPT_CodeInterpreter/assets/39090632/6b8a5716-2889-4c34-bb1c-5c2e826a552f)
+![image](https://github.com/boyueluzhipeng/GPT_CodeInterpreter/assets/39090632/609da341-9462-4b8a-a672-99d3d1dcbc4b)
 2. **Chat History 📝:** Session-based JSON file storage for chat history.
 3. **Continued Conversations 🔄:** Seamless continuation of previous chats with the same `session_id`.
 

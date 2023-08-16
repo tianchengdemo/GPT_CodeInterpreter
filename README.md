@@ -5,14 +5,9 @@ GPT_CodeInterpreter is an AI-driven project designed to carry out various tasks 
 ## Update Log 📝
 
 Our update logs are stored in the [update](./update/) directory. You can click on the links below to view specific updates:
-
-- [Update from August 1, 2023](./update/update_0801.md) 🆕
-  - pip install codebot, then use codebot in the command line,Enjoy !!!!!!!!!!!!!!
-  - Introduced a new way to run the code using command line
-  - Users only need to install our PyPI package and execute it in the command line
-    
-  ![20230731122824](https://github.com/boyueluzhipeng/GPT_CodeInterpreter/assets/39090632/4d7b1078-b452-44f4-918f-8e173aa6b373)
-
+- [Update from August 16, 2023](./update/update_0816.md) 🆕
+![image](https://github.com/boyueluzhipeng/GPT_CodeInterpreter/assets/39090632/6b8a5716-2889-4c34-bb1c-5c2e826a552f)
+- [Update from August 1, 2023](./update/update_0801.md) 
 - [Update from July 30, 2023](./update/update_0730.md)
 
 Please check back regularly for our latest updates!

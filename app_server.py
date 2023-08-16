@@ -141,6 +141,27 @@ def create_chatbot(session_id):
         chatbot_dit[session_id] = chatbot
     return chatbot_dit[session_id]
 
+def create_chatbot_endpoint(settings):
+    global chatbot_dit
+    chatbot = None
+    session_id = settings['SESSION_ID']
+    if session_id not in chatbot_dit:
+        chatbot = Chatbot(function_manager=function_manager, 
+                      api_key=settings['OPENAI_API_KEY'],
+                      base_url=settings['OPENAI_API_BASE'],
+                      system_prompt=settings['SYSTEM_PROMPT'],
+                      engine=settings['OPENAI_MODEL'],
+                      max_tokens=int(settings['MAX_TOKENS']),
+                      session_id=session_id,
+        )
+        
+        chatbot.add_to_conversation(role="assistant", message="![image](http://localhost:8000/tmp/1692077412.7676768.png)")
+        chatbot_dit[session_id] = chatbot
+    else:
+        chatbot = chatbot_dit[session_id]
+    
+    return chatbot
+
 
 async def agent(input_text):
     session_id = cl.user_session.get('settings')['SESSION_ID']
@@ -152,22 +173,26 @@ valid_models = ["gpt-3.5-turbo", "gpt-4", "gpt-3.5-turbo-16k"]
 
 @app.post("/v1/chat/completions")
 async def create_conversation(request_data: dict):
+    settings = {}
     session_id = request_data.get('session_id', uuid.uuid4().hex)
-    chatbot = create_chatbot(session_id)
     messages = request_data.get('messages')
     content = messages[0].get('content')
     model = request_data.get('model', 'gpt-3.5-turbo')
     model = model.replace("-codeinterpreter", "")
-    
+    settings['OPENAI_MODEL'] = model
+    # headers中获取Authorization bearer token
+    settings['OPENAI_API_KEY'] = os.environ.get('OPENAI_API_KEY')
+    settings['OPENAI_API_BASE'] = os.environ.get('OPENAI_API_BASE')
+    settings['SYSTEM_PROMPT'] = sys_prompt
+    settings['MAX_TOKENS'] = int(os.environ.get('MAX_TOKENS'))
+    settings['SESSION_ID'] = session_id
+    chatbot = create_chatbot_endpoint(settings)
     if model not in valid_models:
         return {"error": "model not found"}
-
     chatbot.engine = model
-
     async def chatbot_responses():
         async for response in chatbot.ask_stream(content):
             yield f"data: {json.dumps(response)}\n\n".encode('utf-8')
-    
     return StreamingResponse(chatbot_responses(), media_type="text/event-stream")
 
 

@@ -128,6 +128,7 @@ def create_chatbot(session_id):
         
         chatbot.add_to_conversation(role="assistant", message="![image](http://localhost:8000/tmp/1692077412.7676768.png)")
         chatbot_dit[session_id] = chatbot
+        
     else:
         print("session_id already exists")
         chatbot = chatbot_dit[session_id]

@@ -231,7 +231,11 @@ class Chatbot:
             def call_async_function():
                 loop = asyncio.new_event_loop()
                 asyncio.set_event_loop(loop)
-                return loop.run_until_complete(self.function_manager.call_function(function_name, json.loads(function_args)))
+                args = json.loads(function_args)
+                if function_name == 'python_exec':
+                    args['session_id'] = self.session_id
+                    print(args)
+                return loop.run_until_complete(self.function_manager.call_function(function_name, args))
             try:
                 function_response = call_async_function()
             except Exception as e:

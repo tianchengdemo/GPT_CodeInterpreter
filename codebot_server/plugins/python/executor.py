@@ -55,7 +55,7 @@ class CodeExecutor:
                 if msg["parent_header"].get("msg_id") == msg_id:
                     msg_type = msg["msg_type"]
                     content = msg["content"]
-                    # print(f"msg_type: {msg_type}, content: {content}")
+                    print(f"msg_type: {msg_type}, content: {content}")
                     if msg_type == "execute_result" or msg_type == "display_data":
                         if "image/png" in content["data"]:
                             # 正则表达式，用于匹配以 .gif 结尾的字符串

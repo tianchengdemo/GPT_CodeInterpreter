@@ -13,7 +13,6 @@ import asyncio
 from functions.MakeRequest import make_request, make_request_chatgpt_plugin
 import globale_values as gv
 from language.gettext import get_text
-from Dxr_mqtt.dxr_log import *
 
 plugin_dirs = [
     d for d in os.listdir('plugins')

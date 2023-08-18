@@ -7,6 +7,7 @@ from queue import Empty
 import re
 from PIL import Image
 import io
+import matplotlib
 
 # 定义移除ANSI转义序列的函数
 def remove_ansi_escape_sequences(s):
@@ -38,6 +39,7 @@ class CodeExecutor:
         if self.timeout_task is not None:
             self.timeout_task.cancel()
         await self.start_kernel()
+        matplotlib.use('Agg')
         # 执行代码
         msg_id = self.kc.execute(code)
 

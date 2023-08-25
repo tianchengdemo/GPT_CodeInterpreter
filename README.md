@@ -6,11 +6,15 @@ GPT_CodeInterpreter is an AI-driven project designed to carry out various tasks 
 
 > 🎉 **I'm thrilled to announce that our open-source project now has its own reverse endpoint. We invite everyone to join the testing phase. Once testing stabilizes, we will open-source the corresponding stable features into this project.**
 
+Endpoint: [https://chat.chatify.me](https://chat.chatify.me)
+
 🌐 **Website**: [https://web.chatboxapp.xyz/](https://web.chatboxapp.xyz/)
    - 🖱️ Click the settings button in the bottom right corner
    - 🧠 Select "OPENAI API" as the AI Model Provider
    - 🔧 Change the API HOST (ensure no trailing slashes at the end)
-   - 🔑 Obtain the OPENAI API KEY via [https://chat.chatify.me](https://chat.chatify.me)
+   - 🔑 Obtain the API KEY via [https://chat.chatify.me](https://chat.chatify.me)
+
+![Website Usage Screenshot](https://github.com/boyueluzhipeng/GPT_CodeInterpreter/assets/39090632/d8244579-b70d-4cc8-a323-8b0eb543f097)
 
 Our reverse endpoint is not only supported on this website but also compatible with any applications that allow modification of the reverse endpoint, such as ChatGPT-Next-Web, etc. You can use our endpoint in the same way as you would with the official API.
 

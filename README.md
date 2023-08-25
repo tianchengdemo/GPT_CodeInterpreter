@@ -25,9 +25,10 @@ Our reverse endpoint is not only supported on this website but also compatible w
 
 Enjoy these exciting new features! 🎉
 
-Discord: https://discord.gg/EBKu4CfV
-Github: https://github.com/boyueluzhipeng/GPT_CodeInterpreter
-微信群二维码: ![WechatIMG354](https://github.com/boyueluzhipeng/GPT_CodeInterpreter/assets/39090632/73426c99-4d6b-491b-8e7e-521badc4a5c9)
+Discord: [Join our server](https://discord.gg/EBKu4CfV) | 
+Github: [Our repository](https://github.com/boyueluzhipeng/GPT_CodeInterpreter) | 
+微信群: <img src="https://github.com/boyueluzhipeng/GPT_CodeInterpreter/assets/39090632/73426c99-4d6b-491b-8e7e-521badc4a5c9" width="100"/>
+
 
 
 ## Update Log 📝

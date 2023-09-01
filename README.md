@@ -38,7 +38,7 @@ Enjoy these exciting new features! 🎉
 
 Discord: [Join our server](https://discord.gg/EBKu4CfV) | 
 Github: [Our repository](https://github.com/boyueluzhipeng/GPT_CodeInterpreter) | 
-微信群: <img src="https://github.com/boyueluzhipeng/GPT_CodeInterpreter/assets/39090632/73426c99-4d6b-491b-8e7e-521badc4a5c9" width="100"/>
+微信群: <img src="https://github.com/boyueluzhipeng/GPT_CodeInterpreter/assets/39090632/398bb640-e4fc-4c9b-9b58-6fc400c35f09" width="100"/>
 
 
 

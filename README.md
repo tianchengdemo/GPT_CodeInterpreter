@@ -18,6 +18,16 @@ We're excited 😃 to announce that you can now implement your very own custom e
 
 Endpoint: [https://chat.chatify.me](https://chat.chatify.me)
 
+## Connect with Us 🌐
+
+- **Discord**: [Join our server](https://discord.gg/7UdJnyH6) for live support and community engagement 🎮
+- **Github**: Check out [Our repository](https://github.com/boyueluzhipeng/GPT_CodeInterpreter) for code and updates 🛠️
+- **微信群**: Scan the QR code below to join our WeChat group for local support 🇨🇳
+  <img src="https://github.com/boyueluzhipeng/GPT_CodeInterpreter/assets/39090632/398bb640-e4fc-4c9b-9b58-6fc400c35f09" width="100"/>
+
+### 🗨️ Got Feedback?
+Feel free to join our Discord or WeChat groups if you have any feedback or questions. We're here to help! 🤝
+
 ## Common Features
 
 ### Current Features
@@ -46,10 +56,6 @@ Our reverse endpoint is not only supported on this website but also compatible w
 ![20230825110741](https://github.com/boyueluzhipeng/GPT_CodeInterpreter/assets/39090632/13a6fd5e-7b60-4c1c-92db-7b10807dc9d6)
 
 Enjoy these exciting new features! 🎉
-
-Discord: [Join our server](https://discord.gg/7UdJnyH6) | 
-Github: [Our repository](https://github.com/boyueluzhipeng/GPT_CodeInterpreter) | 
-微信群: <img src="https://github.com/boyueluzhipeng/GPT_CodeInterpreter/assets/39090632/398bb640-e4fc-4c9b-9b58-6fc400c35f09" width="100"/>
 
 ## Update Log 📝
 Our update logs are stored in the [update](./update/) directory. You can click on the links below to view specific updates:

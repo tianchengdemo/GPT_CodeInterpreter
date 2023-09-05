@@ -36,7 +36,7 @@ Our reverse endpoint is not only supported on this website but also compatible w
 
 Enjoy these exciting new features! 🎉
 
-Discord: [Join our server](https://discord.gg/EBKu4CfV) | 
+Discord: [Join our server](https://discord.gg/7UdJnyH6) | 
 Github: [Our repository](https://github.com/boyueluzhipeng/GPT_CodeInterpreter) | 
 微信群: <img src="https://github.com/boyueluzhipeng/GPT_CodeInterpreter/assets/39090632/398bb640-e4fc-4c9b-9b58-6fc400c35f09" width="100"/>
 

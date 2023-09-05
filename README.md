@@ -23,6 +23,7 @@ Endpoint: [https://chat.chatify.me](https://chat.chatify.me)
 - **Discord**: [Join our server](https://discord.gg/7UdJnyH6) for live support and community engagement 🎮
 - **Github**: Check out [Our repository](https://github.com/boyueluzhipeng/GPT_CodeInterpreter) for code and updates 🛠️
 - **微信群**: Scan the QR code below to join our WeChat group for local support 🇨🇳
+
   <img src="https://github.com/boyueluzhipeng/GPT_CodeInterpreter/assets/39090632/398bb640-e4fc-4c9b-9b58-6fc400c35f09" width="100"/>
 
 ### 🗨️ Got Feedback?

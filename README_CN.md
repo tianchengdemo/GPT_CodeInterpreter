@@ -17,6 +17,14 @@
 🎉 **（新）个人功能/插件上传和调用**
 端点：https://chat.chatify.me
 
+**API 获取方式:**
+
+🌐 **网站**: [https://web.chatboxapp.xyz/](https://web.chatboxapp.xyz/)
+   - 🖱️ 点击左下方的**设置**
+   - 🧠 选择 "OPENAI API" 作为 API 提供商
+   - 🔧 改变 API 端口 **(确保最后不要有/)**
+   - 🔑 通过 [https://chat.chatify.me](https://chat.chatify.me) 获取你的密钥
+
 ## 联系我们🌐
 - **Discord**: [Join our server](https://discord.gg/7UdJnyH6) for live support and community engagement 🎮
 - **Github**: Check out [Our repository](https://github.com/boyueluzhipeng/GPT_CodeInterpreter) for code and updates 🛠️

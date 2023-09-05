@@ -1,28 +1,29 @@
-# FREE GPT Provider & Code interpreter 🤖
+# FREE & Integrated GPT Provider # 🤖
 
-Ultimate and FREE Open AI Provider implemented with Python code interpreter & other multiple functions, powered by ChatGPT & GPT-4!
+Ultimate and FREE OpenAI Provider implemented with Python code interpreter & other multiple functions, powered by ChatGPT & GPT-4!
 
 
-📢 **Announcement!**
-## Quick Start (Updated 20250905) 🚀
+📢 **Announcements!**
+## Quick Start (Updated 20230905) 🚀
 ### 🌟 Create Your Own Endpoints with Plugin_Client
 We're excited 😃 to announce that you can now implement your very own custom endpoints with just a few lines of code! For a detailed walkthrough 📖, visit our new site [Plugin_Client on Chatify](https://beta.chatify.me/plugin_client).
 
-### **Our Reverse Endpoint Supports**(Updated 20250825):
-1. 🗨️ Chatting with ChatGPT (triggers other functions, not for regular Q&A)
-2. 📤 File Uploading (type '/upload'; click "CLICK TO UPLOAD")
+### **Our Reverse Endpoint Supports**(Updated 20230825):
+1. 🗨️ Chatting with ChatGPT ( may trigger other functions)
+2. 📤 File Uploading (type '/upload' and then click "**CLICK TO UPLOAD**")
 3. 🐍 Python Code Interpreter (triggered for specific scenarios)
-4. 🎨 Image Generation (testing; using stable diffusion xl and Kandinsky models to generate one image each, $0.006 per generation, cost covered; seeking free alternatives)
-5. 📸 Image Description (textual descriptions for images)
-6. 🔍 Web Search Functionality (in testing phase)
+4. 🎨 Image Generation (using **Stable Diffusion xl** and **Kandinsky** to generate **two** images each)
+5. 📸 Image Description (generate textual descriptions for images)
+6. 🎉 **(NEW) Personal function/plugin upload & calling**
 
 Endpoint: [https://chat.chatify.me](https://chat.chatify.me)
 
-## Connect with Us 🌐
+## Connect us 🌐
 
 - **Discord**: [Join our server](https://discord.gg/7UdJnyH6) for live support and community engagement 🎮
 - **Github**: Check out [Our repository](https://github.com/boyueluzhipeng/GPT_CodeInterpreter) for code and updates 🛠️
 - **微信群**: Scan the QR code below to join our WeChat group for local support 🇨🇳
+
   <img src="https://github.com/boyueluzhipeng/GPT_CodeInterpreter/assets/39090632/398bb640-e4fc-4c9b-9b58-6fc400c35f09" width="100"/>
 
 ### 🗨️ Got Feedback?
@@ -36,9 +37,9 @@ Feel free to join our Discord or WeChat groups if you have any feedback or quest
 - 🐍 Python Code Interpreter
 - 🎨 Image Generation
 - 📸 Image Description
+- 🎉 Personal function/plugin upload & calling
 
 > 🎉 **I'm thrilled to announce that our open-source project now has its own reverse endpoint. We invite everyone to join the testing phase. Once testing stabilizes, we will open-source the corresponding stable features into this project.**
-
 
 
 **Ways to get our API:**
@@ -46,7 +47,7 @@ Feel free to join our Discord or WeChat groups if you have any feedback or quest
 🌐 **Website**: [https://web.chatboxapp.xyz/](https://web.chatboxapp.xyz/)
    - 🖱️ Click the settings button in the bottom right corner
    - 🧠 Select "OPENAI API" as the AI Model Provider
-   - 🔧 Change the API HOST (ensure no trailing slashes at the end)
+   - 🔧 Change the API HOST **(ensure no trailing slashes (/) at the end)**
    - 🔑 Obtain the API KEY via [https://chat.chatify.me](https://chat.chatify.me)
 
 ![Website Usage Screenshot](https://github.com/boyueluzhipeng/GPT_CodeInterpreter/assets/39090632/d8244579-b70d-4cc8-a323-8b0eb543f097)

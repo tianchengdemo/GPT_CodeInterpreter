@@ -17,7 +17,7 @@
 🎉 **（新）个人功能/插件上传和调用**
 端点：https://chat.chatify.me
 
-**API 获取方式:**
+### API 获取方式:
 
 🌐 **网站**: [https://web.chatboxapp.xyz/](https://web.chatboxapp.xyz/)
    - 🖱️ 点击左下方的**设置**

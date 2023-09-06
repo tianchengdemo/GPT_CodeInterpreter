@@ -9,16 +9,24 @@ Ultimate and FREE OpenAI Provider implemented with Python code interpreter & oth
 We're excited 😃 to announce that you can now implement your very own custom endpoints with just a few lines of code! For a detailed walkthrough 📖, visit our new site [Plugin_Client on Chatify](https://beta.chatify.me/plugin_client).
 
 ### **Our Reverse Endpoint Supports**(Updated 20230825):
-1. 🗨️ Chatting with ChatGPT ( may trigger other functions)
-2. 📤 File Uploading (type '/upload' and then click "**CLICK TO UPLOAD**")
-3. 🐍 Python Code Interpreter (triggered for specific scenarios)
-4. 🎨 Image Generation (using **Stable Diffusion xl** and **Kandinsky** to generate **two** images each)
-5. 📸 Image Description (generate textual descriptions for images)
+1. 🗨️ Chatting with ChatGPT (May trigger other functions)
+2. 📤 File Uploading (Type '/upload' and then click "**CLICK TO UPLOAD**")
+3. 🐍 Python Code Interpreter (Triggered for specific scenarios)
+4. 🎨 Image Generation (Using **Stable Diffusion xl** and **Kandinsky** to generate **two** images each)
+5. 📸 Image Description (Generate textual descriptions for images)
 6. 🎉 **(NEW) Personal function/plugin upload & calling**
 
 Endpoint: [https://chat.chatify.me](https://chat.chatify.me)
 
-## Connect us 🌐
+### **Functions to be added:
+1. 📊 Excel file (.xksx) processing (Read, write and manipulate .xlsx files)
+2. 📄 PDF file (.pdf) processing (Read, extract text, and convert PDF files, may use OCR or other techniques)
+3. 🖥️ VUE develop assistant (Help in developing and debugging VUE.js applications)
+4. 🌐 Recognize website contents (Summarize or extract website contents, automatically scroll down the screen and locate the contents)
+5. 🐧 Linux Backend Operations Assistant (Assist in operating and managing Linux servers)
+6. 🕷️ Automated Web Data Crawler (Automate the process of web scraping and data extraction from websites)
+
+## Cotact us 🌐
 
 - **Discord**: [Join our server](https://discord.gg/7UdJnyH6) for live support and community engagement 🎮
 - **Github**: Check out [Our repository](https://github.com/boyueluzhipeng/GPT_CodeInterpreter) for code and updates 🛠️

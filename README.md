@@ -8,6 +8,8 @@ Ultimate and FREE OpenAI Provider implemented with Python code interpreter & oth
 ### 🌟 Create Your Own Endpoints with Plugin_Client
 We're excited 😃 to announce that you can now implement your very own custom endpoints with just a few lines of code! For a detailed walkthrough 📖, visit our new site [Plugin_Client on Chatify](https://beta.chatify.me/plugin_client).
 
+In addition, we've added the first demo code in `cook`, using the very popular `open-interpreter` project. This project allows you to fully move the functionality of the command line terminal to your personal custom endpoint with minimal code. The plugin part completely uses the functionality of the [open-interpreter](https://github.com/KillianLucas/open-interpreter) project for the simplest feature migration and upgrade.
+
 https://github.com/boyueluzhipeng/GPT_CodeInterpreter/assets/39090632/e94052fc-e252-4db0-9f6e-5255715ca3db
 
 ### **Our Reverse Endpoint Supports**(Updated 20230825):

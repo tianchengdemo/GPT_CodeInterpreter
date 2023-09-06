@@ -1,49 +1,64 @@
-# FREE GPT Provider & Code interpreter 🤖
+# FREE & Integrated GPT Provider # 🤖
 
-Ultimate and FREE Open AI Provider implemented with Python code interpreter & other multiple functions, powered by ChatGPT & GPT-4!
+Ultimate and FREE OpenAI Provider implemented with Python code interpreter & other multiple functions, powered by ChatGPT & GPT-4!
 
 
-📢 **Announcement!**
+📢 **Announcements!**
+## Quick Start (Updated 20230905) 🚀
+### 🌟 Create Your Own Endpoints with Plugin_Client
+We're excited 😃 to announce that you can now implement your very own custom endpoints with just a few lines of code! For a detailed walkthrough 📖, visit our new site [Plugin_Client on Chatify](https://beta.chatify.me/plugin_client).
+
+### **Our Reverse Endpoint Supports**(Updated 20230825):
+1. 🗨️ Chatting with ChatGPT ( may trigger other functions)
+2. 📤 File Uploading (type '/upload' and then click "**CLICK TO UPLOAD**")
+3. 🐍 Python Code Interpreter (triggered for specific scenarios)
+4. 🎨 Image Generation (using **Stable Diffusion xl** and **Kandinsky** to generate **two** images each)
+5. 📸 Image Description (generate textual descriptions for images)
+6. 🎉 **(NEW) Personal function/plugin upload & calling**
+
+Endpoint: [https://chat.chatify.me](https://chat.chatify.me)
+
+## Connect us 🌐
+
+- **Discord**: [Join our server](https://discord.gg/7UdJnyH6) for live support and community engagement 🎮
+- **Github**: Check out [Our repository](https://github.com/boyueluzhipeng/GPT_CodeInterpreter) for code and updates 🛠️
+- **微信群**: Scan the QR code below to join our WeChat group for local support 🇨🇳
+
+  <img src="https://github.com/boyueluzhipeng/GPT_CodeInterpreter/assets/39090632/398bb640-e4fc-4c9b-9b58-6fc400c35f09" width="100"/>
+
+### 🗨️ Got Feedback?
+Feel free to join our Discord or WeChat groups if you have any feedback or questions. We're here to help! 🤝
+
+## Common Features
+
+### Current Features
+- 🗨️ Chat with ChatGPT
+- 📤 File Uploading
+- 🐍 Python Code Interpreter
+- 🎨 Image Generation
+- 📸 Image Description
+- 🎉 Personal function/plugin upload & calling
 
 > 🎉 **I'm thrilled to announce that our open-source project now has its own reverse endpoint. We invite everyone to join the testing phase. Once testing stabilizes, we will open-source the corresponding stable features into this project.**
 
-🚀 **Our Reverse Endpoint Supports**:
-1. 🗨️ Chatting with ChatGPT (triggers other functions, not for regular Q&A)
-2. 📤 File Uploading (type '/upload'; click "CLICK TO UPLOAD")
-3. 🐍 Python Code Interpreter (triggered for specific scenarios)
-4. 🎨 Image Generation (testing; using stable diffusion xl and Kandinsky models to generate one image each, $0.006 per generation, cost covered; seeking free alternatives)
-5. 📸 Image Description (textual descriptions for images)
-6. 🔍 Web Search Functionality (in testing phase)
-
-Endpoint: [https://chat.chatify.me](https://chat.chatify.me)
 
 **Ways to get our API:**
 
 🌐 **Website**: [https://web.chatboxapp.xyz/](https://web.chatboxapp.xyz/)
    - 🖱️ Click the settings button in the bottom right corner
    - 🧠 Select "OPENAI API" as the AI Model Provider
-   - 🔧 Change the API HOST (ensure no trailing slashes at the end)
+   - 🔧 Change the API HOST **(ensure no trailing slashes (/) at the end)**
    - 🔑 Obtain the API KEY via [https://chat.chatify.me](https://chat.chatify.me)
 
 ![Website Usage Screenshot](https://github.com/boyueluzhipeng/GPT_CodeInterpreter/assets/39090632/d8244579-b70d-4cc8-a323-8b0eb543f097)
 
 Our reverse endpoint is not only supported on this website but also compatible with any applications that allow modification of the reverse endpoint, such as ChatGPT-Next-Web, etc. You can use our endpoint in the same way as you would with the official API.
 
-
-
-
 ![20230825110741](https://github.com/boyueluzhipeng/GPT_CodeInterpreter/assets/39090632/13a6fd5e-7b60-4c1c-92db-7b10807dc9d6)
 
 Enjoy these exciting new features! 🎉
 
-Discord: [Join our server](https://discord.gg/EBKu4CfV) | 
-Github: [Our repository](https://github.com/boyueluzhipeng/GPT_CodeInterpreter) | 
-微信群: <img src="https://github.com/boyueluzhipeng/GPT_CodeInterpreter/assets/39090632/398bb640-e4fc-4c9b-9b58-6fc400c35f09" width="100"/>
-
-
-
 ## Update Log 📝
-
 Our update logs are stored in the [update](./update/) directory. You can click on the links below to view specific updates:
 - [Update from August 25, 2023](./update/update_0825.md) 🆕🔥
 - [Update from August 16, 2023](./update/update_0816.md)
@@ -52,34 +67,6 @@ Our update logs are stored in the [update](./update/) directory. You can click o
 - [Update from July 30, 2023](./update/update_0730.md)
 
 Please check back regularly for our latest updates!
-
-
-
-# Welcome to my project! 👋
-I'm glad to introduce you to a project I've been working on. It's a chatbot hosted at [this link](https://chat.zhipenglu.repl.co). 
-
-## How to Use 📚
-To get started, visit the [https://chat.zhipenglu.repl.co](https://chat.zhipenglu.repl.co) and type in your query or command. Here are some commands you can use:
-- **/set_api_key** - Set your OPENAI_API_KEY 🔑
-- **/set_model** - Set your OPENAI_MODEL 🤖
-- **/set_language** - Set your language 🌍
-- **/set_api_base** - Set your OPENAI_API_BASE 🌐
-- **/help** - Show this help 📘
-
-## Enjoy! 🎉
-I hope you find this chatbot useful and fun to use. Enjoy!
-
-## 📣 Feedback & Support
-
-🔧 **Test Website Status:** The test website is hosted on Replit and was set up in a hurry. As such, it might experience occasional downtime or restarts. Rest assured, I'm actively working on improving its stability over time.
-
-📬 **Encountered an Issue?** If the test website is down or if you encounter any issues, please don't hesitate to [open an issue](https://github.com/boyueluzhipeng/GPT_CodeInterpreter/issues). I'll do my best to address it as promptly as possible.
-
-💡 **Suggestions or Feedback?** Your thoughts matter! If you have any suggestions or feedback, I'm all ears. Please share your ideas by [opening an issue](https://github.com/boyueluzhipeng/GPT_CodeInterpreter/issues). I strive to respond and incorporate valuable feedback as quickly as I can.
-
-Thank you for your understanding and support! 🙏
-
-
 
 ## Pictures About GPT_CodeInterpreter
 
@@ -90,49 +77,10 @@ Thank you for your understanding and support! 🙏
 ![image](https://github.com/boyueluzhipeng/GPT_CodeInterpreter/assets/39090632/ce360bb1-1347-4a96-a345-d15ddef618c2)
 
 
-
 ## Video Demonstrations 🎥
 
 https://github.com/boyueluzhipeng/GPT_CodeInterpreter/assets/39090632/d55503f7-f51c-4d0a-a284-e811eb5a98ac
 
-
-
-
-## Project Features
-
-- **Plugin Architecture**: GPT_CodeInterpreter uses a flexible and extensible plugin architecture. Each plugin is a folder containing `functions.py` and `config.json` files, defining the functionality and configuration of the plugin.
-
-### 🌟 Upcoming Features:
-
-- **Official Plugin Integration🔌**: By processing the provided standard `openapi.yaml` from the official sources, we can automatically fetch the corresponding request URLs and method names. These will be combined with local functions and sent to GPT as if invoking local features. Upon user invocation, we'll categorize and request the respective API, ensuring real-time and precise feedback.
-
-- **Role Masking🎭**: We've integrated numerous role-based features within our local plugins. For instance, the newly added `Vue` plugin can be used to modify local Vue projects effortlessly.
-
-- **Join the Movement🤝**: We're actively inviting passionate individuals to collaborate with us on this project! Let's move towards a "metaGPT" future and co-develop an array of fascinating role plugins.
-
-### 🌈 Future Plans:
-
-- **Multi-client Interactions🔗**: When running multiple clients, we aspire for these clients to exchange messages, facilitating data transfer amongst different roles.
-
-  **Preliminary Concept💡**:
-
-  - **Server-side⚙️**: Operated by a GPT-4 "Administrator" preset role, its main duties will encompass assigning tasks based on users' "Role Masks" and preset objectives, and subsequently evaluating task completion rates.
-  
-  - **Client-side🖥️**: Users can autonomously register with the server and will then be able to receive dispatched tasks and feedback on task completion rates. It can execute certain tasks autonomously and also supports interaction via a web chat interface to accomplish associated tasks.
-
-Let's look forward to the limitless possibilities these new features can offer! 🚀🎉
-
-- **Function Manager**: The function manager is responsible for parsing and calling the functions defined in the `functions.py` file of each plugin.
-
-- **AI Driven**: GPT_CodeInterpreter leverages the power of AI to understand and generate human language, enabling it to handle a variety of tasks related to code interpretation.
-
-## Current Plugins
-
-1. **General Plugin**: This plugin provides the functionality of displaying and uploading images.
-
-2. **Python Interpreter Plugin**: This plugin includes a Python executor for running Python code, which is very useful for tasks such as data analysis and table processing.
-
-3. **Vue Plugin**: Currently under development, this plugin is designed to work with Vue projects, automating the entire Vue project modification through the chat interface.
 
 ## Documentation
 

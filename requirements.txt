@@ -5,3 +5,4 @@ prompt_toolkit==3.0.39
 jupyter
 mysql-connector-python
 open-interpreter
+litellm

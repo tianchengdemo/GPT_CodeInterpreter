@@ -4,3 +4,4 @@ tiktoken==0.4.0
 prompt_toolkit==3.0.39
 jupyter
 mysql-connector-python
+open-interpreter

@@ -4,25 +4,33 @@ Ultimate and FREE OpenAI Provider implemented with Python code interpreter & oth
 
 
 📢 **Announcements!**
-## Quick Start (Updated 20230905) 🚀
+We're working on our own model, which is a **fine-tuned version** of **code-llama-34b-python**, which means it will offer you better service and using experience.
+Also, a fine-tuned **Chinese** language model based on **ChatGLM-2-6b** will be released ater.
+
+## Quick Start 🚀
 ### 🌟 Create Your Own Endpoints with Plugin_Client
 We're excited 😃 to announce that you can now implement your very own custom endpoints with just a few lines of code! For a detailed walkthrough 📖, visit our new site [Plugin_Client on Chatify](https://beta.chatify.me/plugin_client).
 
-In addition, we've added the first demo code in `cookbook`, using the very popular `open-interpreter` project. This project allows you to fully move the functionality of the command line terminal to your personal custom endpoint with minimal code. The plugin part completely uses the functionality of the [open-interpreter](https://github.com/KillianLucas/open-interpreter) project for the simplest feature migration and upgrade.
-
-https://github.com/boyueluzhipeng/GPT_CodeInterpreter/assets/39090632/e94052fc-e252-4db0-9f6e-5255715ca3db
-
-### **Our Reverse Endpoint Supports**(Updated 20230825):
-1. 🗨️ Chatting with ChatGPT ( may trigger other functions)
-2. 📤 File Uploading (type '/upload' and then click "**CLICK TO UPLOAD**")
-3. 🐍 Python Code Interpreter (triggered for specific scenarios)
-4. 🎨 Image Generation (using **Stable Diffusion xl** and **Kandinsky** to generate **two** images each)
-5. 📸 Image Description (generate textual descriptions for images)
-6. 🎉 **(NEW) Personal function/plugin upload & calling**
+### **Our Reverse Endpoint Supports**:
+1. 🗨️ Chatting with ChatGPT (May trigger other functions)
+2. 📤 File Uploading (Type '/upload' and then click "**CLICK TO UPLOAD**")
+3. 🐍 Python Code Interpreter (Triggered for specific scenarios)
+4. 🎨 Image Generation (Using **Stable Diffusion xl** and **Kandinsky** to generate **two** images each)
+5. 📸 Image Description (Generate textual descriptions for images)
+6. 🎉 **(NEW) Personal function/plugin upload & calling** (Write your **own** function and ChatGPT will help you **with your own preferences**)
+7. 🎉 **(NEW) Local code interpreter** (Processs commands you ask about your computer, like **Turn on Dark Mode**, **Read the PDF file** and **Open Safari and search *** for me**)
 
 Endpoint: [https://chat.chatify.me](https://chat.chatify.me)
 
-## Connect us 🌐
+### Functions to be added:
+1. 📊 Excel file (.xksx) processing (Read, write and manipulate .xlsx files)
+2. 📄 PDF file (.pdf) processing (Read, extract text, and convert PDF files, may use OCR or other techniques)
+3. 🖥️ VUE develop assistant (Help in developing and debugging VUE.js applications)
+4. 🌐 Recognize website contents (Summarize or extract website contents, automatically scroll down the screen and locate the contents)
+5. 🐧 Linux Backend Operations Assistant (Assist in operating and managing Linux servers)
+6. 🕷️ Automated Web Data Crawler (Automate the process of web scraping and data extraction from websites)
+
+## Cotact us 🌐
 
 - **Discord**: [Join our server](https://discord.gg/7UdJnyH6) for live support and community engagement 🎮
 - **Github**: Check out [Our repository](https://github.com/boyueluzhipeng/GPT_CodeInterpreter) for code and updates 🛠️
